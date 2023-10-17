@@ -21,7 +21,7 @@ const WeatherInfo = ({ info }) => {
             </WeatherItem>
             <WeatherItem style={styles.item}>
                 <View style={styles.conditionIconContainer}>
-                    <Image style={styles.conditionIcon} source={info.condition.icon}></Image>
+                    <Image style={styles.conditionIcon} src={`https://${info.condition.icon}`}></Image>
                 </View>
                 <Text>{info.condition.text}</Text>
             </WeatherItem>
@@ -30,7 +30,7 @@ const WeatherInfo = ({ info }) => {
                 <Text>Direção: {info.wind_degree} {info.wind_dir}</Text>
             </WeatherItem>
             <WeatherItem style={styles.item}>
-                <Text>Chuva Prevista: {info.precip_mm}</Text>
+                <Text>Chuva Prevista: {info.precip_mm} mm</Text>
             </WeatherItem>
         </View>
 
@@ -45,15 +45,20 @@ const styles = StyleSheet.create({
         flex: 1,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        alignItems: 'flex-start'
+        alignItems: 'flex-start',
+        marginTop: 8,
+        rowGap: 3,
+        columnGap: 3
     },
     item: {
-        width: '50%',
-        alignItems: 'center'
+        width: '48%',
+        margin: 'auto',
+        alignItems: 'center',
     },
     conditionIconContainer: {
-        height: 200,
-        width: 200,
+        height: 75,
+        width: 75,
+        alignSelf: 'center',
         overflow: 'hidden'
     },
     conditionIcon: {

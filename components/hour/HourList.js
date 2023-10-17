@@ -1,15 +1,11 @@
 import { FlatList } from "react-native"
 import HourItem from "./HourItem";
 
-const HourList = ({ list: [] }) => {
-
-    return (
-        <FlatList 
-            horizontal
-            data={list}
-            renderItem={({item}) => <HourItem item={item} />}
-         /> 
-    )
-}
-
+const HourList = ({ hourList, onSelectHour, selected }) => (
+    <FlatList 
+        horizontal
+        data={hourList}
+        renderItem={({item}) => <HourItem item={item} selected={selected} onSelectHour={onSelectHour} />}
+        />
+)
 export default HourList;

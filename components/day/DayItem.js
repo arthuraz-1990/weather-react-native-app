@@ -1,21 +1,32 @@
+import dayjs from "dayjs";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const DayItem = ({ item, onSelectDay }) => {
+const DayItem = ({ item, onSelectDay, selected }) => {
+
+    const { day } = item;
+    const date = dayjs(item.date).format('DD/MM/YYYY');
+
+    const isSelected = item.date === selected?.date;
+
+    const borderStyle = {
+        borderWidth: isSelected ? 1 : 0.5
+    }
 
     return (
-        <TouchableOpacity styles={styles.item} onPress={onSelectDay.bind(this, item)}>
+        <TouchableOpacity style={[borderStyle, styles.item]} onPress={onSelectDay.bind(this, item)}>
             <View>
-                <Text >{item.date}</Text>
-            </View>
-            <View style={[styles.middleContainer, styles.imageContainer]}>
-                <Image style={styles.image} source={item.condition.icon} />
+                <Text style={styles.dateText}>{date}</Text>
             </View>
             <View style={styles.middleContainer}>
-                <Text style={styles.itemText}>{item.day.maxtemp_c} C</Text>
-                <Text style={styles.itemText}>{item.day.mintemp_c} C</Text>
-                <Text style={styles.rainText}>{item.day.daily_chance_of_rain}%</Text>
+                <View style={styles.imageContainer}>
+                    <Image style={styles.image} src={`https://${day.condition.icon}`} />
+                </View>
+                <View style={styles.textContainer}>
+                    <Text style={styles.itemText}>{day.maxtemp_c} C</Text>
+                    <Text style={styles.itemText}>{day.mintemp_c} C</Text>
+                    <Text style={styles.rainText}>{day.daily_chance_of_rain}%</Text>
+                </View>
             </View>
-            
         </TouchableOpacity>
     );
 
@@ -25,28 +36,36 @@ export default DayItem;
 
 const styles = StyleSheet.create({
     item: {
-        flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start',
         borderRadius: 2,
-        borderWidth: 1
+        borderColor: 'black',
+        flex: 1,
+        alignItems: 'center',
+        height: '100%'
+    },
+    dateText: {
+        fontWeight: 'bold'
     },
     middleContainer: {
-        width: '50%',
-        height: 100
+        flexDirection: 'row',
+        marginTop: 5
     },
     image: {
         width: '100%',
         height: '100%',
     },
     imageContainer: {
+        flex: 1,
         overflow: 'hidden',
-        alignItems: 'center'
+        height: 45,
+        width: 45
+    },
+    textContainer: {
+        flex: 1,
+        textAlign: 'center'
     },
     itemText: {
         fontWeight: '500',
-        fontSize: 12
+        fontSize: 12,
     },
     rainText: {
         fontSize: 10,

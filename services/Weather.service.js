@@ -1,34 +1,21 @@
 import axios from "axios";
 
+import { RAPIDAPI_KEY, WEATHERAPI_HOST } from '@env';
+
 class WeatherService {
-
-    // getRealtime(lat, lon) {
-    //     const options = {
-    //         method: 'GET',
-    //         url: `https://${process.env.WEATHERAPI_HOST}/current.json`,
-    //         headers: {
-    //           'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
-    //           'X-RapidAPI-Host': process.env.WEATHERAPI_HOST
-    //         },
-    //         params: {
-    //             q: `${lat},${lon}`
-    //         }
-    //     };
-
-    //     return axios.request(options);
-    // }
 
     getForecast(lat, lon, days = 3) {
         const options = {
             method: 'GET',
-            url: `https://${process.env.WEATHERAPI_HOST}/forecast.json`,
+            url: `https://${WEATHERAPI_HOST}/forecast.json`,
             headers: {
-              'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,
-              'X-RapidAPI-Host': process.env.WEATHERAPI_HOST
+              'X-RapidAPI-Key': RAPIDAPI_KEY,
+              'X-RapidAPI-Host': WEATHERAPI_HOST
             },
             params: {
                 q: `${lat},${lon}`,
-                days
+                days,
+                lang: 'pt'
             }
         };
         return axios.request(options);
