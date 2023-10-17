@@ -1,6 +1,8 @@
 import dayjs from "dayjs";
 import { Image, StyleSheet, Text, View } from "react-native"
 import WeatherItem from "./WeatherItem";
+import { FontAwesome5 } from '@expo/vector-icons'; 
+
 
 const WeatherInfo = ({ info }) => {
 
@@ -12,10 +14,12 @@ const WeatherInfo = ({ info }) => {
     return (
         <View style={styles.info}>
             <WeatherItem style={styles.item}>
+                <FontAwesome5 name="clock" size={24} color="black" />
                 <Text>Data: {currentDate}</Text>
                 <Text>Hora: {currentHour}</Text>
             </WeatherItem>
             <WeatherItem style={styles.item}>
+                <FontAwesome5 name="temperature-high" size={24} color="black" />
                 <Text>Temperatura: {info.temp_c} C</Text>
                 <Text>Sensação: {info.feelslike_c} C</Text>
             </WeatherItem>
@@ -26,10 +30,12 @@ const WeatherInfo = ({ info }) => {
                 <Text>{info.condition.text}</Text>
             </WeatherItem>
             <WeatherItem style={styles.item}>
+                <FontAwesome5 name="wind" size={24} color="black" />
                 <Text>Vento: {info.wind_kph} km/h</Text>
                 <Text>Direção: {info.wind_degree} {info.wind_dir}</Text>
             </WeatherItem>
             <WeatherItem style={styles.item}>
+                <FontAwesome5 name="cloud-rain" size={24} color="black" />
                 <Text>Chuva Prevista: {info.precip_mm} mm</Text>
             </WeatherItem>
         </View>
@@ -54,10 +60,11 @@ const styles = StyleSheet.create({
         width: '48%',
         margin: 'auto',
         alignItems: 'center',
+        flexGrow: 1
     },
     conditionIconContainer: {
-        height: 75,
-        width: 75,
+        height: 55,
+        width: 55,
         alignSelf: 'center',
         overflow: 'hidden'
     },

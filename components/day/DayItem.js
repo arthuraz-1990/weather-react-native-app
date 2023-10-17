@@ -1,5 +1,7 @@
 import dayjs from "dayjs";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Colors from "../../constants/Colors";
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 const DayItem = ({ item, onSelectDay, selected }) => {
 
@@ -9,22 +11,34 @@ const DayItem = ({ item, onSelectDay, selected }) => {
     const isSelected = item.date === selected?.date;
 
     const borderStyle = {
-        borderWidth: isSelected ? 1 : 0.5
+        borderWidth: isSelected ? 1 : 0.5,
+        backgroundColor: isSelected ? Colors.primary600 : Colors.secondary500
+    }
+
+    const itemTextColor = {
+        color: isSelected ? Colors.accent500 : 'black'
+    }
+
+    const rainTextColor = {
+        color: isSelected ? Colors.darkMain : Colors.secondary600
     }
 
     return (
         <TouchableOpacity style={[borderStyle, styles.item]} onPress={onSelectDay.bind(this, item)}>
             <View>
-                <Text style={styles.dateText}>{date}</Text>
+                <Text style={[itemTextColor, styles.dateText]}>{date}</Text>
             </View>
             <View style={styles.middleContainer}>
                 <View style={styles.imageContainer}>
                     <Image style={styles.image} src={`https://${day.condition.icon}`} />
                 </View>
                 <View style={styles.textContainer}>
-                    <Text style={styles.itemText}>{day.maxtemp_c} C</Text>
-                    <Text style={styles.itemText}>{day.mintemp_c} C</Text>
-                    <Text style={styles.rainText}>{day.daily_chance_of_rain}%</Text>
+                    <Text style={[itemTextColor, styles.itemText]}>{day.maxtemp_c.toLocaleString('pt-BR')} C</Text>
+                    <Text style={[itemTextColor, styles.itemText]}>{day.mintemp_c} C</Text>
+                    <Text style={[rainTextColor, styles.rainText]}>
+                        <FontAwesome5 name="cloud-rain" size={8} color={rainTextColor.color} />
+                        {day.daily_chance_of_rain}%
+                    </Text>
                 </View>
             </View>
         </TouchableOpacity>
@@ -36,7 +50,7 @@ export default DayItem;
 
 const styles = StyleSheet.create({
     item: {
-        borderRadius: 2,
+        borderRadius: 4,
         borderColor: 'black',
         flex: 1,
         alignItems: 'center',
@@ -56,8 +70,8 @@ const styles = StyleSheet.create({
     imageContainer: {
         flex: 1,
         overflow: 'hidden',
-        height: 45,
-        width: 45
+        height: 35,
+        width: 5
     },
     textContainer: {
         flex: 1,
@@ -68,7 +82,6 @@ const styles = StyleSheet.create({
         fontSize: 12,
     },
     rainText: {
-        fontSize: 10,
-        color: 'blue'
+        fontSize: 10
     }
 })

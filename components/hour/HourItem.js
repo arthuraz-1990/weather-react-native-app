@@ -1,5 +1,6 @@
 import dayjs from "dayjs";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import Colors from "../../constants/Colors";
 
 const HourItem = ({ item, onSelectHour, selected }) => {
 
@@ -8,7 +9,16 @@ const HourItem = ({ item, onSelectHour, selected }) => {
     const isSelected = item.time === selected?.time;
 
     const borderStyle = {
-        borderWidth: isSelected ? 1 : 0.5
+        borderWidth: isSelected ? 1 : 0.5,
+        backgroundColor: isSelected ? Colors.primary600 : Colors.secondary500
+    }
+
+    const itemTextColor = {
+        color: isSelected ? Colors.accent500 : 'black'
+    }
+
+    const rainTextColor = {
+        color: isSelected ? Colors.darkMain: Colors.primary600
     }
 
     return (
@@ -16,8 +26,8 @@ const HourItem = ({ item, onSelectHour, selected }) => {
             <View style={styles.imageContainer}>
                 <Image style={styles.image} src={`https://${item.condition.icon}`} />
             </View>
-            <Text style={styles.itemText}>{hour}h</Text>
-            <Text style={styles.rainText}>{item.chance_of_rain}%</Text>
+            <Text style={[itemTextColor, styles.itemText]}>{hour}h</Text>
+            <Text style={[rainTextColor, styles.rainText]}>{item.chance_of_rain}%</Text>
         </TouchableOpacity>
     )
 
@@ -27,8 +37,7 @@ export default HourItem;
 
 const styles = StyleSheet.create({
     item: {
-        borderRadius: 2,
-        borderColor: 'black',
+        borderRadius: 4,
         alignItems: 'center',
         marginRight: 2
     },
@@ -45,7 +54,6 @@ const styles = StyleSheet.create({
         fontSize: 11
     },
     rainText: {
-        fontSize: 10,
-        color: 'blue'
+        fontSize: 10
     }
 })

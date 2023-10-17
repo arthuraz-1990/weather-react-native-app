@@ -1,4 +1,5 @@
 import { StyleSheet, View } from "react-native";
+import Colors from "../../constants/Colors";
 
 const WeatherItem = ({ icon, children, style }) => {
 
@@ -24,7 +25,8 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         borderRadius: 2,
         borderWidth: 1,
-        padding: 5
+        padding: 5,
+        backgroundColor: Colors.accent500
     },
     icon: {
         flex: 1,

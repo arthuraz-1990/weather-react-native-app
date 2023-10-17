@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { ImageBackground, SafeAreaView, StyleSheet } from 'react-native';
 import ForecastScreen from './screens/ForecastScreen';
 import LoadingScreen from './screens/LoadingScreen';
 import ErrorScreen from './screens/ErrorScreen';
@@ -45,18 +45,26 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      <SafeAreaView style={styles.container}>
-        { content }
-      </SafeAreaView>
+      <ImageBackground style={styles.mainView} imageStyle={styles.background}
+          source={require('./assets/images/background.jpg')} resizeMode='cover'>
+        <SafeAreaView style={styles.container}>
+          { content }
+        </SafeAreaView>
+      </ImageBackground>
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  mainView: {
+    flex: 1
+  },
   container: {
     flex: 1,
-    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
+  background: {
+    opacity: 0.35
+  }
 });
