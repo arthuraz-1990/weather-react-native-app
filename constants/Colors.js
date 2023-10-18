@@ -1,11 +1,14 @@
 const Colors = {
-    primary400: '#2AABEE',
-    primary500: '#179CDE',
-    primary600: '#0088CC',
-    secondary500: '#8C8C8C',
-    secondary600: '#333333',
-    accent500: '#FFFFFF',
-    darkMain: '#2f2f2f'
+    primary400: 'rgb(42, 171, 238)',
+    primary500: 'rgb(23, 156, 222)',
+    primary600: 'rgb(0, 136, 204)',
+    secondary500: 'rgb(140, 140, 140)',
+    secondary600: 'rgb(51, 51, 51)',
+    accent500: 'rgb(255, 255, 255)',
+    darkMain: 'rgb(47, 47, 47)',
+    text: 'rgb(0, 0, 0)',
+
+    toRgba: (colorRgb, alpha) => colorRgb.replace('rgb', 'rgba').replace(')', `,${alpha})`)
 }
 
 export default Colors;

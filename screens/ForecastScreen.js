@@ -6,9 +6,9 @@ import HourList from "../components/hour/HourList";
 import WeatherInfo from "../components/weather/WeatherInfo";
 import LocationInfo from "../components/location/LocationInfo";
 
-const ForecastScreen = ({ forecastResponse }) => {
+const ForecastScreen = ({ forecastResponse, location, onShowSearch }) => {
 
-    const { forecast, location, current } = forecastResponse;
+    const { forecast, current } = forecastResponse;
 
     const [ selectedDay, setSelectedDay ] = useState(forecast.forecastday[0]);
 
@@ -27,7 +27,7 @@ const ForecastScreen = ({ forecastResponse }) => {
 
     return (
         <View style={styles.mainView}>
-            <LocationInfo info={location} />
+            <LocationInfo info={location} onShowSearch={onShowSearch}/>
             <View style={styles.dayView}>
                 <DayList dayList={forecast.forecastday} selected={selectedDay} onSelectDay={onSelectDay} />
             </View>
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
         padding: 12
     },
     dayView: {
-        height: 100
+        margin: 'auto'
     },
     hourView: {
         height: 65

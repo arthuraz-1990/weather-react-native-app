@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Colors from "../../constants/Colors";
+import { FontAwesome5 } from '@expo/vector-icons'; 
 
 const HourItem = ({ item, onSelectHour, selected }) => {
 
@@ -10,15 +11,15 @@ const HourItem = ({ item, onSelectHour, selected }) => {
 
     const borderStyle = {
         borderWidth: isSelected ? 1 : 0.5,
-        backgroundColor: isSelected ? Colors.primary600 : Colors.secondary500
+        backgroundColor: Colors.toRgba(isSelected ? Colors.primary600 : Colors.secondary500, 0.7)
     }
 
     const itemTextColor = {
-        color: isSelected ? Colors.accent500 : 'black'
+        color: isSelected ? Colors.accent500 : Colors.text
     }
 
     const rainTextColor = {
-        color: isSelected ? Colors.darkMain: Colors.primary600
+        color: isSelected ? Colors.accent500 : Colors.text
     }
 
     return (
@@ -26,8 +27,12 @@ const HourItem = ({ item, onSelectHour, selected }) => {
             <View style={styles.imageContainer}>
                 <Image style={styles.image} src={`https://${item.condition.icon}`} />
             </View>
-            <Text style={[itemTextColor, styles.itemText]}>{hour}h</Text>
-            <Text style={[rainTextColor, styles.rainText]}>{item.chance_of_rain}%</Text>
+            <Text style={[itemTextColor, styles.itemText, styles.text]}>{hour}h</Text>
+            <View style={styles.rainRow}>
+                <FontAwesome5 name="cloud-rain" size={styles.rainText.fontSize} color={rainTextColor.color} />
+                <Text style={[rainTextColor, styles.rainText, styles.text]}>{item.chance_of_rain}%</Text>
+            </View>
+            
         </TouchableOpacity>
     )
 
@@ -39,7 +44,9 @@ const styles = StyleSheet.create({
     item: {
         borderRadius: 4,
         alignItems: 'center',
-        marginRight: 2
+        marginRight: 4,
+        width: 45,
+        height: 60
     },
     imageContainer: {
         overflow: 'hidden',
@@ -55,5 +62,12 @@ const styles = StyleSheet.create({
     },
     rainText: {
         fontSize: 10
+    },
+    rainRow: {
+        flexDirection: 'row',
+        columnGap: 3
+    },
+    text: {
+        fontWeight: '500'
     }
 })

@@ -2,6 +2,8 @@ import dayjs from "dayjs";
 import { Image, StyleSheet, Text, View } from "react-native"
 import WeatherItem from "./WeatherItem";
 import { FontAwesome5 } from '@expo/vector-icons'; 
+import Colors from "../../constants/Colors";
+import Util from "../../util/Util";
 
 
 const WeatherInfo = ({ info }) => {
@@ -9,34 +11,43 @@ const WeatherInfo = ({ info }) => {
     const weatherTime = dayjs(info.time ?? info.last_updated);
 
     const currentDate = weatherTime.format('DD/MM/YYYY');
-    const currentHour = weatherTime.format('HH:mm')
+    const currentHour = weatherTime.format('HH:mm');
+    const iconSize = 36;
 
     return (
         <View style={styles.info}>
             <WeatherItem style={styles.item}>
-                <FontAwesome5 name="clock" size={24} color="black" />
-                <Text>Data: {currentDate}</Text>
-                <Text>Hora: {currentHour}</Text>
+                <View style={styles.centerAlign}>
+                    <FontAwesome5 name="clock" size={iconSize} color={Colors.accent500} />
+                </View>
+                <Text style={[styles.infoText, styles.centerAlign]}>Data: {currentDate}</Text>
+                <Text style={[styles.infoText, styles.centerAlign]}>Hora: {currentHour}</Text>
             </WeatherItem>
             <WeatherItem style={styles.item}>
-                <FontAwesome5 name="temperature-high" size={24} color="black" />
-                <Text>Temperatura: {info.temp_c} C</Text>
-                <Text>Sensação: {info.feelslike_c} C</Text>
+                <View style={styles.centerAlign}>
+                    <FontAwesome5 name="temperature-high" size={iconSize} color={Colors.accent500} />
+                </View>
+                <Text style={[styles.infoText, styles.centerAlign]}>Temperatura: {Util.formatNumber(info.temp_c)} °C</Text>
+                <Text style={[styles.infoText, styles.centerAlign]}>Sensação: {Util.formatNumber(info.feelslike_c)} °C</Text>
             </WeatherItem>
             <WeatherItem style={styles.item}>
                 <View style={styles.conditionIconContainer}>
                     <Image style={styles.conditionIcon} src={`https://${info.condition.icon}`}></Image>
                 </View>
-                <Text>{info.condition.text}</Text>
+                <Text style={[styles.infoText, styles.centerAlign]}>{info.condition.text}</Text>
             </WeatherItem>
             <WeatherItem style={styles.item}>
-                <FontAwesome5 name="wind" size={24} color="black" />
-                <Text>Vento: {info.wind_kph} km/h</Text>
-                <Text>Direção: {info.wind_degree} {info.wind_dir}</Text>
+                <View style={styles.centerAlign}>
+                    <FontAwesome5 name="wind" size={iconSize} color={Colors.accent500} />
+                </View>
+                <Text style={[styles.infoText, styles.centerAlign]}>Vento: {Util.formatNumber(info.wind_kph)} km/h</Text>
+                <Text style={[styles.infoText, styles.centerAlign]}>Direção: {info.wind_degree} {info.wind_dir}</Text>
             </WeatherItem>
             <WeatherItem style={styles.item}>
-                <FontAwesome5 name="cloud-rain" size={24} color="black" />
-                <Text>Chuva Prevista: {info.precip_mm} mm</Text>
+                <View style={styles.centerAlign}>
+                    <FontAwesome5 name="cloud-rain" size={iconSize} color={Colors.accent500} />
+                </View>
+                <Text style={[styles.infoText, styles.centerAlign]}>Chuva Prevista: {Util.formatNumber(info.precip_mm)} mm</Text>
             </WeatherItem>
         </View>
 
@@ -49,18 +60,13 @@ export default WeatherInfo;
 const styles = StyleSheet.create({
     info: {
         flex: 1,
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        alignItems: 'flex-start',
         marginTop: 8,
-        rowGap: 3,
-        columnGap: 3
+        rowGap: 7
     },
     item: {
-        width: '48%',
-        margin: 'auto',
-        alignItems: 'center',
-        flexGrow: 1
+        width: '60%',
+        alignSelf: 'center',
+        rowGap: 3
     },
     conditionIconContainer: {
         height: 55,
@@ -71,5 +77,13 @@ const styles = StyleSheet.create({
     conditionIcon: {
         width: '100%',
         height: '100%'
+    },
+    infoText: {
+        color: Colors.accent500,
+        fontWeight: '500',
+        textAlign: 'center'
+    },
+    centerAlign: {
+        alignSelf: 'center'
     }
 });

@@ -3,6 +3,8 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
+import Util from '../../util/Util';
+
 const DayItem = ({ item, onSelectDay, selected }) => {
 
     const { day } = item;
@@ -12,15 +14,15 @@ const DayItem = ({ item, onSelectDay, selected }) => {
 
     const borderStyle = {
         borderWidth: isSelected ? 1 : 0.5,
-        backgroundColor: isSelected ? Colors.primary600 : Colors.secondary500
+        backgroundColor: Colors.toRgba(isSelected ? Colors.primary600 : Colors.secondary500, 0.7)
     }
 
     const itemTextColor = {
-        color: isSelected ? Colors.accent500 : 'black'
+        color: isSelected ? Colors.accent500 : Colors.darkMain
     }
 
     const rainTextColor = {
-        color: isSelected ? Colors.darkMain : Colors.secondary600
+        color: isSelected ? Colors.accent500 : Colors.secondary600
     }
 
     return (
@@ -33,12 +35,21 @@ const DayItem = ({ item, onSelectDay, selected }) => {
                     <Image style={styles.image} src={`https://${day.condition.icon}`} />
                 </View>
                 <View style={styles.textContainer}>
-                    <Text style={[itemTextColor, styles.itemText]}>{day.maxtemp_c.toLocaleString('pt-BR')} C</Text>
-                    <Text style={[itemTextColor, styles.itemText]}>{day.mintemp_c} C</Text>
-                    <Text style={[rainTextColor, styles.rainText]}>
+                    <View style={styles.rowView}>
+                        <FontAwesome5 name="temperature-high" size={12} color={itemTextColor.color} />
+                        <Text style={[itemTextColor, styles.itemText]}>{Util.formatNumber(day.maxtemp_c)} °C</Text>
+                    </View>
+                    <View style={styles.rowView}>
+                        <FontAwesome5 name="temperature-low" size={12} color={itemTextColor.color} />
+                        <Text style={[itemTextColor, styles.itemText]}>{Util.formatNumber(day.mintemp_c)} °C</Text>
+                    </View>
+                    <View style={styles.rowView}>
                         <FontAwesome5 name="cloud-rain" size={8} color={rainTextColor.color} />
-                        {day.daily_chance_of_rain}%
-                    </Text>
+                        <Text style={[rainTextColor, styles.rainText]}>
+                            {day.daily_chance_of_rain}%
+                        </Text>
+                    </View>
+                    
                 </View>
             </View>
         </TouchableOpacity>
@@ -78,10 +89,15 @@ const styles = StyleSheet.create({
         textAlign: 'center'
     },
     itemText: {
-        fontWeight: '500',
-        fontSize: 12,
+        fontWeight: '700',
+        fontSize: 11,
     },
     rainText: {
         fontSize: 10
+    },
+    rowView: {
+        flexDirection: 'row',
+        columnGap: 3,
+        alignItems: 'center'
     }
 })
