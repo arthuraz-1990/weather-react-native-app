@@ -1,4 +1,4 @@
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import Colors from "../constants/Colors";
 
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -21,9 +21,11 @@ const SearchScreen = ({ onSelect, onHide }) => {
 
     const onCleanInput = () => {
         setValue('');
+        setResults([]);
     }
 
     const onSearch = () => {
+        Keyboard.dismiss();
         setLoading(true);
         AddressService.find(value).then(
             resp => {
