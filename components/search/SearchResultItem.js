@@ -25,8 +25,9 @@ const styles = StyleSheet.create({
         height: 80,
         borderColor: Colors.accent500,
         marginRight: 4,
-        borderColor: 'red',
-        borderWidth: 1
+        borderWidth: 1,
+        padding: 6,
+        marginBottom: 2
     },
    
     descriptionText: {
