@@ -5,12 +5,17 @@ import DayList from "../components/day/DayList";
 import HourList from "../components/hour/HourList";
 import WeatherInfo from "../components/weather/WeatherInfo";
 import LocationInfo from "../components/location/LocationInfo";
+import WeatherTypeButton from "../components/weather/WeatherTypeButton";
+import HourlyInfoSection from "../components/hour/HourlyInfoSection";
+import DailyInfoSection from "../components/day/DailyInfoSection";
 
 const ForecastScreen = ({ forecastResponse, location, onShowSearch }) => {
 
     const { forecast, current } = forecastResponse;
 
     const [ selectedDay, setSelectedDay ] = useState(forecast.forecastday[0]);
+
+    const [ section, setSection ] = useState('day');
 
     const currentHourValue = dayjs(current.last_updated).hour;
     const currentHourForecast = selectedDay.hour.find(h => dayjs(h.time).hour === currentHourValue);
@@ -25,18 +30,24 @@ const ForecastScreen = ({ forecastResponse, location, onShowSearch }) => {
         setSelectedHour(hour);
     }
 
+    const onSelectType = (type) => {
+        if (type !== section)
+            setSection(type);
+    }
+
     return (
         <View style={styles.mainView}>
             <LocationInfo info={location} onShowSearch={onShowSearch}/>
             <View style={styles.dayView}>
                 <DayList dayList={forecast.forecastday} selected={selectedDay} onSelectDay={onSelectDay} />
             </View>
-            <View style={styles.hourView}>
-                <HourList hourList={selectedDay.hour} selected={selectedHour} onSelectHour={onSelectHour} />
+            <View style={styles.sectionSelect}>
+                <WeatherTypeButton label='Dia' current={section} onSelect={onSelectType} type='day' /> 
+                <WeatherTypeButton label='Hora' current={section} onSelect={onSelectType} type='hour' />
             </View>
-            <View style={styles.weatherView}>
-                <WeatherInfo info={selectedHour} />
-            </View>
+            { section === 'hour' && <HourlyInfoSection selectedDay={selectedDay} selectedHour={selectedHour} onSelectHour={onSelectHour} /> }
+            { section === 'day' && <DailyInfoSection selectedDay={selectedDay} /> }
+            
         </View>
     )
 }
@@ -49,15 +60,14 @@ const styles = StyleSheet.create({
         rowGap: 8,
         marginTop: 28,
         marginHorizontal: 12,
-        padding: 12
+        padding: 12,
+        width: '100%'
     },
     dayView: {
-        margin: 'auto'
+        height: 80
     },
-    hourView: {
-        height: 65
-    },
-    weatherView: {
-        flex: 1
+    sectionSelect: {
+        flexDirection: 'row',
+        justifyContent: 'center'
     }
 })
