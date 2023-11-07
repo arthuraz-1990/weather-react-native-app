@@ -6,6 +6,7 @@ import LocationInfo from "../components/location/LocationInfo";
 import WeatherTypeButton from "../components/weather/WeatherTypeButton";
 import HourlyInfoSection from "../components/hour/HourlyInfoSection";
 import DailyInfoSection from "../components/day/DailyInfoSection";
+import SelectedDayItem from "../components/day/SelectedDayItem";
 
 const ForecastScreen = ({ forecastResponse, location, onShowSearch }) => {
 
@@ -37,12 +38,13 @@ const ForecastScreen = ({ forecastResponse, location, onShowSearch }) => {
         <View style={styles.mainView}>
             <LocationInfo info={location} onShowSearch={onShowSearch}/>
             <View style={styles.dayView}>
-                <DayList dayList={forecast.forecastday} selected={selectedDay} onSelectDay={onSelectDay} />
+                {/* <DayList dayList={forecast.forecastday} selected={selectedDay} onSelectDay={onSelectDay} /> */}
+                <SelectedDayItem selected={selectedDay} />
             </View>
-            <View style={styles.sectionSelect}>
+            {/* <View style={styles.sectionSelect}>
                 <WeatherTypeButton label='Dia' current={section} onSelect={onSelectType} type='day' /> 
                 <WeatherTypeButton label='Hora' current={section} onSelect={onSelectType} type='hour' />
-            </View>
+            </View> */}
             { section === 'hour' && <HourlyInfoSection selectedDay={selectedDay} selectedHour={selectedHour} onSelectHour={onSelectHour} /> }
             { section === 'day' && <DailyInfoSection selectedDay={selectedDay} /> }
             
@@ -62,7 +64,7 @@ const styles = StyleSheet.create({
         width: '100%'
     },
     dayView: {
-        height: 80
+        height: '40%'
     },
     sectionSelect: {
         flexDirection: 'row',

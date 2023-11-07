@@ -30,12 +30,12 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     textCity: {
-        fontSize: 15,
+        fontSize: 20,
         fontWeight: '800',
         color: Colors.darkMain
     },
     text: {
-        fontSize: 12,
+        fontSize: 16,
         fontWeight: '500',
         color: Colors.darkMain
     }
