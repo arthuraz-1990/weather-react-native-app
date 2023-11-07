@@ -55,7 +55,7 @@ export default ForecastScreen;
 const styles = StyleSheet.create({
     mainView: {
         flex: 1,
-        rowGap: 8,
+        rowGap: 3,
         marginTop: 28,
         marginHorizontal: 12,
         padding: 12,
