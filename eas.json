@@ -1,0 +1,24 @@
+{
+    "build": {
+      "preview": {
+        "android": {
+          "buildType": "apk"
+        }
+      },
+      "preview2": {
+        "android": {
+          "gradleCommand": ":app:assembleRelease"
+        }
+      },
+      "preview3": {
+        "developmentClient": true
+      },
+      "production": {
+        "env": {
+          "API_HOST": "https://weather-app-api-dxh0.onrender.com",
+          "LAT_TEST": "-22.8808",
+          "LON_TEST": "-43.1043"
+        }
+      }
+    }
+  }
