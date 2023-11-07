@@ -1,20 +1,15 @@
 import axios from "axios";
 
-import { ADDRESS_API_HOST, RAPIDAPI_KEY } from '@env';
+import { API_HOST } from '@env';
 
 class AddressService {
 
     find(text, limit = 10) {
         const options = {
             method: 'GET',
-            url: `https://${ADDRESS_API_HOST}/v1/geocode/autocomplete`,
-            headers: {
-              'X-RapidAPI-Key': RAPIDAPI_KEY,
-              'X-RapidAPI-Host': ADDRESS_API_HOST
-            },
+            url: `${API_HOST}/address`,
             params: {
                 text,
-                lang: 'pt',
                 limit
             }
         };

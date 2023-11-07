@@ -2,8 +2,6 @@ import dayjs from "dayjs";
 import { useState } from "react"
 import { StyleSheet, View } from "react-native";
 import DayList from "../components/day/DayList";
-import HourList from "../components/hour/HourList";
-import WeatherInfo from "../components/weather/WeatherInfo";
 import LocationInfo from "../components/location/LocationInfo";
 import WeatherTypeButton from "../components/weather/WeatherTypeButton";
 import HourlyInfoSection from "../components/hour/HourlyInfoSection";

@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
 import Colors from "../../constants/Colors";
 
-const WeatherItem = ({ icon, children, style }) => {
+const WeatherItem = ({ icon, children, style, childrenStyle }) => {
 
     return (
         <View style={[style, styles.item]}>
@@ -10,7 +10,7 @@ const WeatherItem = ({ icon, children, style }) => {
                     {icon}
                 </View>
             }
-            <View style={style.children}>
+            <View style={[childrenStyle, styles.children]}>
                 {children}
             </View>
         </View>

@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Image, ScrollView, StyleSheet, Text, View } from "react-native"
 import WeatherItem from "./WeatherItem";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import Colors from "../../constants/Colors";
@@ -15,41 +15,43 @@ const WeatherInfo = ({ info }) => {
     const iconSize = 36;
 
     return (
-        <View style={styles.info}>
-            <WeatherItem style={styles.item}>
-                <View style={styles.centerAlign}>
-                    <FontAwesome5 name="clock" size={iconSize} color={Colors.accent500} />
-                </View>
-                <Text style={[styles.infoText, styles.centerAlign]}>Data: {currentDate}</Text>
-                <Text style={[styles.infoText, styles.centerAlign]}>Hora: {currentHour}</Text>
-            </WeatherItem>
-            <WeatherItem style={styles.item}>
-                <View style={styles.centerAlign}>
-                    <FontAwesome5 name="temperature-high" size={iconSize} color={Colors.accent500} />
-                </View>
-                <Text style={[styles.infoText, styles.centerAlign]}>Temperatura: {Util.formatNumber(info.temp_c)} °C</Text>
-                <Text style={[styles.infoText, styles.centerAlign]}>Sensação: {Util.formatNumber(info.feelslike_c)} °C</Text>
-            </WeatherItem>
-            <WeatherItem style={styles.item}>
-                <View style={styles.conditionIconContainer}>
-                    <Image style={styles.conditionIcon} src={`https://${info.condition.icon}`}></Image>
-                </View>
-                <Text style={[styles.infoText, styles.centerAlign]}>{info.condition.text}</Text>
-            </WeatherItem>
-            <WeatherItem style={styles.item}>
-                <View style={styles.centerAlign}>
-                    <FontAwesome5 name="wind" size={iconSize} color={Colors.accent500} />
-                </View>
-                <Text style={[styles.infoText, styles.centerAlign]}>Vento: {Util.formatNumber(info.wind_kph)} km/h</Text>
-                <Text style={[styles.infoText, styles.centerAlign]}>Direção: {info.wind_degree} {info.wind_dir}</Text>
-            </WeatherItem>
-            <WeatherItem style={styles.item}>
-                <View style={styles.centerAlign}>
-                    <FontAwesome5 name="cloud-rain" size={iconSize} color={Colors.accent500} />
-                </View>
-                <Text style={[styles.infoText, styles.centerAlign]}>Chuva Prevista: {Util.formatNumber(info.precip_mm)} mm</Text>
-            </WeatherItem>
-        </View>
+        <ScrollView style={styles.mainContainer}>
+            <View style={styles.info}>
+                <WeatherItem style={styles.item}>
+                    <View style={styles.centerAlign}>
+                        <FontAwesome5 name="clock" size={iconSize} color={Colors.accent500} />
+                    </View>
+                    <Text style={[styles.infoText, styles.centerAlign]}>Data: {currentDate}</Text>
+                    <Text style={[styles.infoText, styles.centerAlign]}>Hora: {currentHour}</Text>
+                </WeatherItem>
+                <WeatherItem style={styles.item}>
+                    <View style={styles.centerAlign}>
+                        <FontAwesome5 name="temperature-high" size={iconSize} color={Colors.accent500} />
+                    </View>
+                    <Text style={[styles.infoText, styles.centerAlign]}>Temperatura: {Util.formatNumber(info.temp_c)} °C</Text>
+                    <Text style={[styles.infoText, styles.centerAlign]}>Sensação: {Util.formatNumber(info.feelslike_c)} °C</Text>
+                </WeatherItem>
+                <WeatherItem style={styles.item}>
+                    <View style={styles.conditionIconContainer}>
+                        <Image style={styles.conditionIcon} src={`https://${info.condition.icon}`}></Image>
+                    </View>
+                    <Text style={[styles.infoText, styles.centerAlign]}>{info.condition.text}</Text>
+                </WeatherItem>
+                <WeatherItem style={styles.item}>
+                    <View style={styles.centerAlign}>
+                        <FontAwesome5 name="wind" size={iconSize} color={Colors.accent500} />
+                    </View>
+                    <Text style={[styles.infoText, styles.centerAlign]}>Vento: {Util.formatNumber(info.wind_kph)} km/h</Text>
+                    <Text style={[styles.infoText, styles.centerAlign]}>Direção: {info.wind_degree} {info.wind_dir}</Text>
+                </WeatherItem>
+                <WeatherItem style={styles.item}>
+                    <View style={styles.centerAlign}>
+                        <FontAwesome5 name="cloud-rain" size={iconSize} color={Colors.accent500} />
+                    </View>
+                    <Text style={[styles.infoText, styles.centerAlign]}>Chuva Prevista: {Util.formatNumber(info.precip_mm)} mm</Text>
+                </WeatherItem>
+            </View>
+        </ScrollView>
 
     );
 
@@ -58,6 +60,9 @@ const WeatherInfo = ({ info }) => {
 export default WeatherInfo;
 
 const styles = StyleSheet.create({
+    mainContainer: {
+        flex: 1
+    },
     info: {
         flex: 1,
         marginTop: 8,
@@ -81,9 +86,18 @@ const styles = StyleSheet.create({
     infoText: {
         color: Colors.accent500,
         fontWeight: '500',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 12
     },
     centerAlign: {
         alignSelf: 'center'
+    },
+    itemInner: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    textView: {
+        width: '80%'
     }
 });
