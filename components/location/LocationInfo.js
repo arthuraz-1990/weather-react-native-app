@@ -33,12 +33,12 @@ const styles = StyleSheet.create({
         maxWidth: '75%'
     },
     textCity: {
-        fontSize: 20,
+        fontSize: 18,
         fontWeight: '800',
         color: Colors.darkMain
     },
     text: {
-        fontSize: 16,
+        fontSize: 15,
         fontWeight: '500',
         color: Colors.darkMain
     }

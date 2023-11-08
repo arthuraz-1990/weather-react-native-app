@@ -19,7 +19,7 @@ const SelectedDayItem = ({ selected, onShowDays, onShowHour }) => {
                 </View>
                 <View style={styles.rightView}>
                     <TouchableOpacity style={[styles.selectDayButton]} onPress={onShowDays}>
-                        <Text style={[styles.text, styles.selectText]}>Previsão</Text>
+                        <Text style={[styles.text, styles.selectText]}>Dias</Text>
                         <FontAwesome5 name="calendar" size={iconSize} color={Colors.accent500} />
                     </TouchableOpacity>
                     <TouchableOpacity style={[styles.selectDayButton]} onPress={onShowHour}>
@@ -50,7 +50,6 @@ const styles = StyleSheet.create({
     mainView: {
         flex: 1,
         backgroundColor: Colors.toRgba(Colors.darkMain, 0.7),
-        margin: 3,
         borderRadius: 10
     },
     middleContainer: {
@@ -76,7 +75,7 @@ const styles = StyleSheet.create({
         fontSize: 15
     },
     maxTemp: {
-        fontSize: 45,
+        fontSize: 35,
         fontWeight: "700"
     },
     rowView: {

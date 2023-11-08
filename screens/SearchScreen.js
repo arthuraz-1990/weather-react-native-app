@@ -78,7 +78,8 @@ const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         width: '100%',
-        backgroundColor: Colors.darkMain
+        backgroundColor: Colors.darkMain,
+        padding: 16
     },
     textInput: {
         flex: 1,

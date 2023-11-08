@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { ImageBackground, SafeAreaView, StyleSheet } from 'react-native';
+import { ImageBackground, SafeAreaView, StyleSheet, Text } from 'react-native';
 import ForecastScreen from './screens/ForecastScreen';
 import LoadingScreen from './screens/LoadingScreen';
 import ErrorScreen from './screens/ErrorScreen';
@@ -10,9 +10,35 @@ import { LAT_TEST, LON_TEST } from '@env';
 import SearchScreen from './screens/SearchScreen';
 import HoursScreen from './screens/HoursScreen';
 import SelectDayScreen from './screens/SelectDayScreen';
+import Colors from './constants/Colors';
+import Footer from './components/element/Footer';
+
+const baseBackgroundSrc = './assets/images/';
+
+const images = {
+  default: require(`${baseBackgroundSrc}background.jpg`),
+  cloudy: require(`${baseBackgroundSrc}cloudy-bkg.jpg`),
+  rainy: require(`${baseBackgroundSrc}rainy-bkg.jpg`),
+  sunny: require(`${baseBackgroundSrc}sunny-bkg.jpg`)
+}
+
+const getBackground = (selectedDay) => {
+  let iconName = 'default';
+  if (selectedDay) {
+      let condition = selectedDay.day.condition.text.toLowerCase();
+      if (condition.includes('chuv'))
+        iconName = 'rainy';
+      else if (condition.includes('sol'))
+        iconName = 'sunny';
+      else
+        iconName = 'cloudy'
+  }
+  return images[iconName];
+}
 
 const default_lat = LAT_TEST;
 const default_lon = LON_TEST;
+const defaultBackground = getBackground();
 
 export default function App() {
 
@@ -28,6 +54,8 @@ export default function App() {
   const [ showDays, setShowDays ] = useState(false);
 
   const [ selectedDay, setSelectedDay ] = useState(null);
+
+  const [ background, setBackground ] = useState(defaultBackground);
 
   useEffect(() => {
     if (latLon)
@@ -47,7 +75,7 @@ export default function App() {
           setLocation(data.location);
         }
         const day = data.forecast.forecastday[0];
-        setSelectedDay(day);
+        onSelectDay(day);
       }
     ).catch(err => {
       console.error(err);
@@ -68,6 +96,7 @@ export default function App() {
 
   const onSelectDay = (day) => {
     setSelectedDay(day);
+    setBackground(getBackground(day));
     onReturn();
   }
 
@@ -106,18 +135,25 @@ export default function App() {
     } else if (showDays) {
       content = <SelectDayScreen location={location} forecastResponse={forecastResponse} 
         selectedDay={selectedDay} onReturn={onReturn} onSelectDay={onSelectDay} />
-    }
+    } 
   } else {
     content = <ErrorScreen onPressRetry={onLoadForecast} onPressSearch={onShowSearch} />
   }
+
+  const marginStyle = showSearch || loading ?
+    {} : {
+      marginHorizontal: 16,
+      marginTop: 16
+    }
 
   return (
     <>
       <StatusBar style={showSearch ? 'light' : 'auto'} />
       <ImageBackground style={styles.mainView} imageStyle={styles.background}
-          source={require('./assets/images/background.jpg')} resizeMode='cover'>
-        <SafeAreaView style={styles.container}>
+          source={background} resizeMode='cover'>
+        <SafeAreaView style={[styles.container, marginStyle]}>
           { content }
+          { !showSearch && !loading && <Footer />}
         </SafeAreaView>
       </ImageBackground>
     </>
@@ -131,9 +167,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
   background: {
-    opacity: 0.35
+    opacity: 0.7
   }
 });

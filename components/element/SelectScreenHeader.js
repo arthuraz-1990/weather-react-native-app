@@ -10,7 +10,7 @@ const SelectScreenHeader = ({ location, onReturn, date }) =>
             <Text style={styles.text}>{location.country}</Text>
         </View>
         {date && <Text style={[styles.text, styles.locationText]}>{ date }</Text> }
-        <ReturnButton onReturn={onReturn} />
+        <ReturnButton onReturn={onReturn} style={styles.returnButton}/>
     </View>
 
 export default SelectScreenHeader;
@@ -34,5 +34,8 @@ const styles = StyleSheet.create({
     locationText: {
         fontSize: 14,
         fontWeight: '700'
+    },
+    returnButton: {
+        alignSelf: 'flex-start'
     }
 })
