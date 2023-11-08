@@ -6,7 +6,7 @@ import { FontAwesome5 } from '@expo/vector-icons';
 const LocationInfo = ({ info, onShowSearch }) => {
     return (
         <View style={styles.mainView}>
-            <View>
+            <View style={styles.locationSection}>
                 <Text style={styles.textCity}>{info.name}</Text>
                 <Text style={styles.text}>{info.region}</Text>
                 <Text style={styles.text}>{info.country}</Text>
@@ -28,6 +28,9 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         alignItems: 'center'
+    },
+    locationSection: {
+        maxWidth: '75%'
     },
     textCity: {
         fontSize: 20,
