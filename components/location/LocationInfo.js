@@ -12,8 +12,9 @@ const LocationInfo = ({ info, onShowSearch }) => {
                 <Text style={styles.text}>{info.country}</Text>
             </View>
 
-            <TouchableOpacity onPress={onShowSearch}>
+            <TouchableOpacity style={styles.locationButton} onPress={onShowSearch}>
                 <FontAwesome5 name="search-location" size={styles.textCity.fontSize + 10} color={Colors.darkMain} />
+                <Text style={[styles.text, styles.textLocationButton]}>Buscar Localização</Text>
             </TouchableOpacity>
             
         </View>
@@ -30,7 +31,15 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     locationSection: {
-        maxWidth: '75%'
+        width: '80%'
+    },
+    locationButton: {
+        flex: 1,
+        alignItems: 'center'
+    },
+    textLocationButton: {
+        textAlign: 'center',
+        fontSize: 10
     },
     textCity: {
         fontSize: 18,

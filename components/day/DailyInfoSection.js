@@ -10,7 +10,7 @@ const DailyInfoSection = ({ selectedDay }) => {
     const iconSize = 25;
 
     return (
-        <ScrollView style={styles.mainContainer}>
+        <ScrollView style={styles.mainContainer} contentContainerStyle={styles.justifyView}>
             <View style={styles.rowView}>
                 <View style={styles.info}>
                     <View style={[styles.item, styles.itemInner]}>
@@ -81,8 +81,12 @@ export default DailyInfoSection;
 
 const styles = StyleSheet.create({
     mainContainer: {
-        flex: 1,
+        // flex: 1,
         width: '100%'
+    },
+    justifyView: {
+        flex: 1,
+        justifyContent: 'center'
     },
     rowView: {
         flexDirection: 'row', 
@@ -100,12 +104,10 @@ const styles = StyleSheet.create({
     },
     item: {
         alignSelf: 'center',
-        rowGap: 3
     },
     itemInner: {
         width: '100%',
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: 'row'
     },
     conditionIconContainer: {
         height: 55,

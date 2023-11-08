@@ -10,7 +10,6 @@ import { LAT_TEST, LON_TEST } from '@env';
 import SearchScreen from './screens/SearchScreen';
 import HoursScreen from './screens/HoursScreen';
 import SelectDayScreen from './screens/SelectDayScreen';
-import Colors from './constants/Colors';
 import Footer from './components/element/Footer';
 
 const baseBackgroundSrc = './assets/images/';
