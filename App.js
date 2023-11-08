@@ -8,6 +8,8 @@ import WeatherService from './services/Weather.service';
 
 import { LAT_TEST, LON_TEST } from '@env';
 import SearchScreen from './screens/SearchScreen';
+import HoursScreen from './screens/HoursScreen';
+import SelectDayScreen from './screens/SelectDayScreen';
 
 const default_lat = LAT_TEST;
 const default_lon = LON_TEST;
@@ -21,6 +23,11 @@ export default function App() {
   const [ location, setLocation ] = useState(null);
 
   const [ showSearch, setShowSearch ] = useState(false);
+
+  const [ showHour, setShowHour ] = useState(false);
+  const [ showDays, setShowDays ] = useState(false);
+
+  const [ selectedDay, setSelectedDay ] = useState(null);
 
   useEffect(() => {
     if (latLon)
@@ -39,8 +46,11 @@ export default function App() {
         if (!location) {
           setLocation(data.location);
         }
+        const day = data.forecast.forecastday[0];
+        setSelectedDay(day);
       }
     ).catch(err => {
+      console.error(err);
       setForecastResponse(null);
     }).
     finally(() => {
@@ -56,6 +66,24 @@ export default function App() {
     setShowSearch(false);
   }
 
+  const onSelectDay = (day) => {
+    setSelectedDay(day);
+    onReturn();
+  }
+
+  const onShowHour = () => {
+    setShowHour(true);
+  }
+
+  const onShowDays = () => {
+    setShowDays(true);
+  }
+
+  const onReturn = () => {
+    setShowHour(false);
+    setShowDays(false);
+  }
+
   const onSelectLocation = (selectedLocation) => {
     onHideSearch();
     const { coordinates } = selectedLocation.geometry;
@@ -65,14 +93,23 @@ export default function App() {
     setLocation(locationInfo);
   }
 
-  let content = <ForecastScreen forecastResponse={forecastResponse} location={location} onShowSearch={onShowSearch} />
+  let content = <ForecastScreen selectedDay={selectedDay} location={location} onShowSearch={onShowSearch} 
+    onShowDays={onShowDays} onShowHour={onShowHour} />
 
   if (loading)
     content = <LoadingScreen/>
-  else if (showSearch)
-    content = <SearchScreen onSelect={onSelectLocation} onHide={onHideSearch} />
-  else if (!forecastResponse)
+  else if (forecastResponse) {
+    if (showSearch) {
+      content = <SearchScreen onSelect={onSelectLocation} onHide={onHideSearch} />
+    } else if (showHour) {
+      content = <HoursScreen location={location} selectedDay={selectedDay} onReturn={onReturn}/>
+    } else if (showDays) {
+      content = <SelectDayScreen location={location} forecastResponse={forecastResponse} 
+        selectedDay={selectedDay} onReturn={onReturn} onSelectDay={onSelectDay} />
+    }
+  } else {
     content = <ErrorScreen onPressRetry={onLoadForecast} onPressSearch={onShowSearch} />
+  }
 
   return (
     <>

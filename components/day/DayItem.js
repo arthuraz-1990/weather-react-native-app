@@ -29,22 +29,21 @@ const DayItem = ({ item, onSelectDay, selected }) => {
         <TouchableOpacity style={[borderStyle, styles.item]} onPress={onSelectDay.bind(this, item)}>
             <View>
                 <Text style={[itemTextColor, styles.dateText]}>{date}</Text>
-            </View>
-            <View style={styles.middleContainer}>
                 <View style={styles.imageContainer}>
                     <Image style={styles.image} src={`https://${day.condition.icon}`} />
+                    <Text style={[itemTextColor, styles.itemText]}>{day.condition.text}</Text>
                 </View>
                 <View style={styles.textContainer}>
                     <View style={styles.rowView}>
-                        <FontAwesome5 name="temperature-high" size={12} color={itemTextColor.color} />
+                        <FontAwesome5 name="temperature-high" size={18} color={itemTextColor.color} />
                         <Text style={[itemTextColor, styles.itemText]}>{Util.formatNumber(day.maxtemp_c)} °C</Text>
                     </View>
                     <View style={styles.rowView}>
-                        <FontAwesome5 name="temperature-low" size={12} color={itemTextColor.color} />
+                        <FontAwesome5 name="temperature-low" size={18} color={itemTextColor.color} />
                         <Text style={[itemTextColor, styles.itemText]}>{Util.formatNumber(day.mintemp_c)} °C</Text>
                     </View>
                     <View style={styles.rowView}>
-                        <FontAwesome5 name="cloud-rain" size={8} color={rainTextColor.color} />
+                        <FontAwesome5 name="cloud-rain" size={12} color={rainTextColor.color} />
                         <Text style={[rainTextColor, styles.rainText]}>
                             {day.daily_chance_of_rain}%
                         </Text>
@@ -65,7 +64,8 @@ const styles = StyleSheet.create({
         borderColor: 'black',
         flex: 1,
         alignItems: 'center',
-        height: '100%'
+        height: '100%',
+        padding: 20
     },
     dateText: {
         fontWeight: 'bold'
@@ -81,19 +81,21 @@ const styles = StyleSheet.create({
     imageContainer: {
         flex: 1,
         overflow: 'hidden',
-        height: 35,
-        width: 5
+        height: 25,
+        width: 50,
+        alignSelf: 'center'
     },
     textContainer: {
         flex: 1,
-        textAlign: 'center'
+        textAlign: 'center',
+        rowGap: 5
     },
     itemText: {
         fontWeight: '700',
-        fontSize: 11,
+        fontSize: 15,
     },
     rainText: {
-        fontSize: 10
+        fontSize: 12
     },
     rowView: {
         flexDirection: 'row',

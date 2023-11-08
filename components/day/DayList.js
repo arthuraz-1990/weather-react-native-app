@@ -13,9 +13,7 @@ export default DayList;
 
 const styles = StyleSheet.create({
     viewContainer: {
-        flexDirection: 'row',
         flex: 1,
-        columnGap: 5,
-        maxHeight: 80
+        rowGap: 25
     }
 })

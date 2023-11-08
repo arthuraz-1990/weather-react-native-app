@@ -1,9 +1,9 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
 
-const LoadingScreen = () => (
+const LoadingScreen = ({ textStyle }) => (
     <View style={styles.container}>
         <ActivityIndicator size='large'/>
-        <Text style={styles.text}>Carregando...</Text>
+        <Text style={[styles.text, textStyle]}>Carregando...</Text>
     </View>
 );
 

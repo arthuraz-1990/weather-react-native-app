@@ -18,10 +18,8 @@ export default HourlyInfoSection;
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1, 
-        marginTop: 3
-    },
-    hourView: {
-        height: 65
+        marginTop: 3,
+        rowGap: 20
     },
     weatherView: {
         flex: 1

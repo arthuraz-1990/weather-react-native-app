@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome5 } from '@expo/vector-icons'; 
+import Util from "../../util/Util";
 
 const HourItem = ({ item, onSelectHour, selected }) => {
 
@@ -28,11 +29,11 @@ const HourItem = ({ item, onSelectHour, selected }) => {
                 <Image style={styles.image} src={`https://${item.condition.icon}`} />
             </View>
             <Text style={[itemTextColor, styles.itemText, styles.text]}>{hour}h</Text>
+            <Text style={[rainTextColor, styles.rainText, styles.text]}>{Util.formatNumber(item.temp_c)} °C</Text>
             <View style={styles.rainRow}>
                 <FontAwesome5 name="cloud-rain" size={styles.rainText.fontSize} color={rainTextColor.color} />
                 <Text style={[rainTextColor, styles.rainText, styles.text]}>{item.chance_of_rain}%</Text>
             </View>
-            
         </TouchableOpacity>
     )
 
@@ -45,23 +46,24 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         alignItems: 'center',
         marginRight: 4,
-        width: 45,
-        height: 60
+        width: 70,
+        height: 110,
+        rowGap: 3
     },
     imageContainer: {
         overflow: 'hidden',
-        width: 27.5,
-        height: 27.5
+        width: 40,
+        height: 40
     },
     image: {
         width: '100%',
         height: '100%'
     },
     itemText: {
-        fontSize: 11
+        fontSize: 16
     },
     rainText: {
-        fontSize: 10
+        fontSize: 13
     },
     rainRow: {
         flexDirection: 'row',

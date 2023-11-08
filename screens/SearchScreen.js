@@ -42,7 +42,7 @@ const SearchScreen = ({ onSelect, onHide }) => {
 
     let content = <SearchResultsList resultList={results} onSelect={onSelect}/>
     if (loading)
-        content = <LoadingScreen/>
+        content = <LoadingScreen textStyle={styles.loadingText}/>
     else if (results.length === 0)
         content = emptyResults;
 
@@ -85,6 +85,9 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.accent500,
         padding: 8
     },
+    loadingText: {
+        color: Colors.accent500
+    },  
     searchContainer: {
         flexDirection: 'row',
         height: 100,
