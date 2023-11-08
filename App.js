@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState } from 'react';
-import { ImageBackground, SafeAreaView, StyleSheet, Text } from 'react-native';
+import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import ForecastScreen from './screens/ForecastScreen';
 import LoadingScreen from './screens/LoadingScreen';
 import ErrorScreen from './screens/ErrorScreen';
@@ -141,8 +141,8 @@ export default function App() {
 
   const marginStyle = showSearch || loading ?
     {} : {
-      marginHorizontal: 16,
-      marginTop: 16
+      paddingHorizontal: 16,
+      paddingTop: 16
     }
 
   return (
@@ -150,8 +150,10 @@ export default function App() {
       <StatusBar style={showSearch ? 'light' : 'auto'} />
       <ImageBackground style={styles.mainView} imageStyle={styles.background}
           source={background} resizeMode='cover'>
-        <SafeAreaView style={[styles.container, marginStyle]}>
-          { content }
+        <SafeAreaView style={styles.container}>
+          <View style={[styles.container, marginStyle]}>
+            { content }
+          </View>
           { !showSearch && !loading && <Footer />}
         </SafeAreaView>
       </ImageBackground>
@@ -166,7 +168,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    width: '100%'
   },
   background: {
     opacity: 0.7
