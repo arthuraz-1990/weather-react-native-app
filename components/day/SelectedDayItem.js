@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import Colors from "../../constants/Colors";
 import Util from "../../util/Util";
 import dayjs from "dayjs";
@@ -22,14 +22,16 @@ const SelectedDayItem = ({ selected, onShowDays, onShowHour }) => {
                     <CustomText style={[styles.text, styles.firstRowText]} bold>{day.condition.text}</CustomText>
                 </View>
                 <View style={styles.rightView}>
-                    <CustomButton style={styles.selectDayButton} onPress={onShowDays}>
-                        <CustomText style={[styles.text, styles.selectText]}>Dias</CustomText>
-                        <FontAwesome5 name="calendar" size={iconSize} color={Colors.accent500} />
-                    </CustomButton>
-                    <CustomButton style={styles.selectDayButton} onPress={onShowHour}>
-                        <CustomText style={[styles.text, styles.selectText]}>Hora a Hora</CustomText>
-                        <FontAwesome5 name="clock" size={iconSize} color={Colors.accent500} />
-                    </CustomButton>
+                    <View style={styles.buttonsContainer}>
+                        <CustomButton style={styles.selectDayButton} onPress={onShowDays}>
+                            <CustomText style={[styles.text, styles.selectText]}>Dias</CustomText>
+                            <FontAwesome5 name="calendar" size={iconSize} color={Colors.accent500} />
+                        </CustomButton>
+                        <CustomButton style={styles.selectDayButton} onPress={onShowHour}>
+                            <CustomText style={[styles.text, styles.selectText]}>Hora a Hora</CustomText>
+                            <FontAwesome5 name="clock" size={iconSize} color={Colors.accent500} />
+                        </CustomButton>
+                    </View>
                     
                     <CustomText style={[ styles.text, styles.date ]}>{date}</CustomText>
                     <CustomText style={[styles.text, styles.maxTemp]}>{Util.formatNumber(day.maxtemp_c)} °C</CustomText>
@@ -96,12 +98,16 @@ const styles = StyleSheet.create({
     rightView: {
         flex: 1
     },
+    buttonsContainer: {
+        margin: 5,
+        rowGap: 5
+    },
     selectDayButton: {
+        width: '100%',
         flexDirection: 'row',
         justifyContent: 'flex-end',
-        alignItems: 'center', 
-        marginTop: 10, 
-        marginRight: 15,
+        alignItems: 'center',
+        paddingTop: 5,
         columnGap: 5,
         borderColor: Colors.accent500,
     }, 

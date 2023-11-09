@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between',
         backgroundColor: Colors.toRgba(Colors.darkMain, 0.7),
-        padding: 20,
+        padding: 15,
         borderRadius: 10,
         alignItems: 'center'
     },

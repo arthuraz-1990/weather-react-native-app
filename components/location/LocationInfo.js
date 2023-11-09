@@ -35,8 +35,9 @@ const styles = StyleSheet.create({
         width: '80%'
     },
     locationButton: {
-        flex: 1,
-        alignItems: 'center'
+        // flex: 1,
+        alignItems: 'center',
+        width: 80
     },
     textLocationButton: {
         textAlign: 'center',

@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
     },
     selectButton: {
         paddingHorizontal: 10,
-        marginTop: 5,
         flexDirection: 'row',
         columnGap: 5
     },
