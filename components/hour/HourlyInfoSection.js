@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, View } from "react-native"
 import WeatherInfo from "../weather/WeatherInfo"
 import HourList from "./HourList"
 

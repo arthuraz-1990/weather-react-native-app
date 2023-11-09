@@ -1,4 +1,4 @@
-import { Keyboard, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Keyboard, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import Colors from "../constants/Colors";
 
 import { FontAwesome5 } from '@expo/vector-icons';

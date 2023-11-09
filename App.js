@@ -1,6 +1,6 @@
 import { StatusBar } from 'expo-status-bar';
 import { useCallback, useEffect, useState } from 'react';
-import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
+import { ImageBackground, SafeAreaView, StyleSheet, View } from 'react-native';
 import ForecastScreen from './screens/ForecastScreen';
 import LoadingScreen from './screens/LoadingScreen';
 import ErrorScreen from './screens/ErrorScreen';

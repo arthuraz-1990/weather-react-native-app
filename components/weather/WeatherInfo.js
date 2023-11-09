@@ -1,5 +1,5 @@
 import dayjs from "dayjs";
-import { Image, ScrollView, StyleSheet, Text, View } from "react-native"
+import { Image, ScrollView, StyleSheet, View } from "react-native"
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import Colors from "../../constants/Colors";
 import Util from "../../util/Util";

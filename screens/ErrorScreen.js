@@ -1,4 +1,4 @@
-import { Button, StyleSheet, Text, View } from "react-native";
+import { Button, StyleSheet, View } from "react-native";
 import CustomText from "../components/element/CustomText";
 
 const ErrorScreen = ({ onPressRetry, onPressSearch }) => (

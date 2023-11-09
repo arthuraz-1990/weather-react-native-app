@@ -3,7 +3,7 @@
 import { useState } from "react";
 import HourlyInfoSection from "../components/hour/HourlyInfoSection";
 import dayjs from "dayjs";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import SelectScreenHeader from "../components/element/SelectScreenHeader";
 
 const HoursScreen = ({ location, selectedDay, onReturn }) => {
