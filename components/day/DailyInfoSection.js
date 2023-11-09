@@ -54,8 +54,8 @@ const DailyInfoSection = ({ selectedDay }) => {
                             <FontAwesome5 name="sun" size={iconSize} color={Colors.accent500} />
                         </View>
                         <View style={styles.textView}>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Nascer Sol: {astro.sunrise}</Text>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Pôr do Sol: {astro.sunset}</Text>
+                            <Text style={[styles.infoText, styles.centerAlign]}>Nascer: {astro.sunrise}</Text>
+                            <Text style={[styles.infoText, styles.centerAlign]}>Pôr: {astro.sunset}</Text>
                             <Text style={[styles.infoText, styles.centerAlign]}>Índice UV: {Util.formatNumber(day.uv)} %</Text>
                         </View>
                     </View>
@@ -65,8 +65,8 @@ const DailyInfoSection = ({ selectedDay }) => {
                         </View>
                         <View style={styles.textView}>
                             <Text style={[styles.infoText, styles.centerAlign]}>{Util.translateMoonPhase(astro.moon_phase)}</Text>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Nascer Lua: {astro.moonrise}</Text>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Pôr da Lua: {astro.moonset}</Text>
+                            <Text style={[styles.infoText, styles.centerAlign]}>Nascer: {astro.moonrise}</Text>
+                            <Text style={[styles.infoText, styles.centerAlign]}>Pôr: {astro.moonset}</Text>
                             <Text style={[styles.infoText, styles.centerAlign]}>Iluminação: {astro.moon_illumination}%</Text>
                         </View>
                     </View>
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
         color: Colors.accent500,
         fontWeight: '500',
         textAlign: 'center',
-        fontSize: 12
+        fontSize: 13
     },
     centerAlign: {
         alignSelf: 'center'

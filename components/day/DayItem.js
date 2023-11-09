@@ -1,9 +1,10 @@
 import dayjs from "dayjs";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
 import Util from '../../util/Util';
+import CustomButton from "../element/CustomButton";
 
 const DayItem = ({ item, onSelectDay, selected }) => {
 
@@ -25,33 +26,47 @@ const DayItem = ({ item, onSelectDay, selected }) => {
         color: isSelected ? Colors.accent500 : Colors.secondary600
     }
 
+    const selectButtonBorder = {
+        borderColor: isSelected ? Colors.accent500 : Colors.secondary600
+    }
+
     return (
-        <TouchableOpacity style={[borderStyle, styles.item]} onPress={onSelectDay.bind(this, item)}>
-            <View>
-                <Text style={[itemTextColor, styles.dateText]}>{date}</Text>
-                <View style={styles.imageContainer}>
-                    <Image style={styles.image} src={`https://${day.condition.icon}`} />
+        <View style={[borderStyle, styles.item]}>
+            <View style={styles.rowView}>
+                <View style={[styles.textContainer, styles.firstRow]}>
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image} src={`https://${day.condition.icon}`} />
+                    </View>
                     <Text style={[itemTextColor, styles.itemText]}>{day.condition.text}</Text>
                 </View>
                 <View style={styles.textContainer}>
-                    <View style={styles.rowView}>
-                        <FontAwesome5 name="temperature-high" size={18} color={itemTextColor.color} />
-                        <Text style={[itemTextColor, styles.itemText]}>{Util.formatNumber(day.maxtemp_c)} °C</Text>
+                    <View style={styles.buttonView}>
+                        <CustomButton style={{...selectButtonBorder, ...styles.selectButton}} onPress={onSelectDay.bind(this, item)}>
+                            <Text style={{...itemTextColor, ...styles.selectButtonText}}>Visualizar</Text>
+                            <FontAwesome5 name="eye" size={18} color={itemTextColor.color} />
+                        </CustomButton>
                     </View>
-                    <View style={styles.rowView}>
-                        <FontAwesome5 name="temperature-low" size={18} color={itemTextColor.color} />
-                        <Text style={[itemTextColor, styles.itemText]}>{Util.formatNumber(day.mintemp_c)} °C</Text>
+                    <View style={styles.textInfoContainer}>
+                        <Text style={[itemTextColor, styles.dateText]}>{date}</Text>
+                        <View style={styles.rowView}>
+                            <FontAwesome5 name="temperature-high" size={18} color={itemTextColor.color} />
+                            <Text style={[itemTextColor, styles.itemText]}>{Util.formatNumber(day.maxtemp_c)} °C</Text>
+                        </View>
+                        <View style={styles.rowView}>
+                            <FontAwesome5 name="temperature-low" size={18} color={itemTextColor.color} />
+                            <Text style={[itemTextColor, styles.itemText]}>{Util.formatNumber(day.mintemp_c)} °C</Text>
+                        </View>
+                        <View style={styles.rowView}>
+                            <FontAwesome5 name="cloud-rain" size={12} color={rainTextColor.color} />
+                            <Text style={[rainTextColor, styles.rainText]}>
+                                {day.daily_chance_of_rain}%
+                            </Text>
+                        </View>
                     </View>
-                    <View style={styles.rowView}>
-                        <FontAwesome5 name="cloud-rain" size={12} color={rainTextColor.color} />
-                        <Text style={[rainTextColor, styles.rainText]}>
-                            {day.daily_chance_of_rain}%
-                        </Text>
-                    </View>
-                    
                 </View>
+                
             </View>
-        </TouchableOpacity>
+        </View>
     );
 
 }
@@ -65,7 +80,38 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         height: '100%',
-        padding: 20
+        paddingHorizontal: 10,
+        paddingVertical: 5
+    },
+    buttonView: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        width: '100%'
+    },
+    rowView: {
+        flexDirection: 'row',
+        flex: 1,
+        columnGap: 5
+    },
+    firstRow: {
+        alignItems: 'center',
+        marginRight: 20,
+        justifyContent: 'center',
+        flex: 1
+    },
+    selectButton: {
+        paddingHorizontal: 10,
+        marginTop: 5,
+        flexDirection: 'row',
+        columnGap: 5
+    },
+    selectButtonText: {
+        fontWeight: '700'
+    },
+    textInfoContainer: {
+        flex: 1,
+        rowGap: 5,
+        marginTop: 10
     },
     dateText: {
         fontWeight: 'bold'
@@ -79,10 +125,9 @@ const styles = StyleSheet.create({
         height: '100%',
     },
     imageContainer: {
-        flex: 1,
         overflow: 'hidden',
-        height: 25,
-        width: 50,
+        height: 80,
+        width: 80,
         alignSelf: 'center'
     },
     textContainer: {
@@ -92,10 +137,11 @@ const styles = StyleSheet.create({
     },
     itemText: {
         fontWeight: '700',
-        fontSize: 15,
+        fontSize: 20,
+        textAlign: 'center'
     },
     rainText: {
-        fontSize: 12
+        fontSize: 18
     },
     rowView: {
         flexDirection: 'row',

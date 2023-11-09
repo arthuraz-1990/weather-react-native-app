@@ -3,6 +3,7 @@ import Colors from "../../constants/Colors";
 import Util from "../../util/Util";
 import dayjs from "dayjs";
 import { FontAwesome5 } from '@expo/vector-icons';
+import CustomButton from "../element/CustomButton";
 
 const iconSize = 18;
 
@@ -13,19 +14,21 @@ const SelectedDayItem = ({ selected, onShowDays, onShowHour }) => {
     return (
         <View style={styles.mainView}>
              <View style={styles.middleContainer}>
-                <View style={styles.imageContainer}>
-                    <Image style={styles.image} src={`https://${day.condition.icon}`} />
-                    <Text style={[styles.text]}>{day.condition.text}</Text>
+                <View style={styles.firstRow}>
+                    <View style={styles.imageContainer}>
+                        <Image style={styles.image} src={`https://${day.condition.icon}`} />
+                    </View>
+                    <Text style={[styles.text, styles.firstRowText]}>{day.condition.text}</Text>
                 </View>
                 <View style={styles.rightView}>
-                    <TouchableOpacity style={[styles.selectDayButton]} onPress={onShowDays}>
+                    <CustomButton style={styles.selectDayButton} onPress={onShowDays}>
                         <Text style={[styles.text, styles.selectText]}>Dias</Text>
                         <FontAwesome5 name="calendar" size={iconSize} color={Colors.accent500} />
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[styles.selectDayButton]} onPress={onShowHour}>
+                    </CustomButton>
+                    <CustomButton style={styles.selectDayButton} onPress={onShowHour}>
                         <Text style={[styles.text, styles.selectText]}>Hora a Hora</Text>
                         <FontAwesome5 name="clock" size={iconSize} color={Colors.accent500} />
-                    </TouchableOpacity>
+                    </CustomButton>
                     
                     <Text style={[ styles.text, styles.date ]}>{date}</Text>
                     <Text style={[styles.text, styles.maxTemp]}>{Util.formatNumber(day.maxtemp_c)} °C</Text>
@@ -55,21 +58,27 @@ const styles = StyleSheet.create({
     middleContainer: {
         flexDirection: 'row'
     },
+    firstRow: {
+        flex: 1
+    },
     imageContainer: {
-        flex: 1,
-        height: '100%',
         overflow: 'hidden',
-        padding: 25,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        flex: 1,
+        padding: 20
+    },
+    firstRowText: {
+        textAlign: 'center',
+        fontSize: 18
     },
     image: {
-        width: '75%',
-        height: '75%',
+        width: '100%',
+        height: '100%',
     },
     text: {
         color: Colors.accent500,
-        fontSize: 22
+        fontSize: 18
     },
     selectText: {
         fontSize: 15
@@ -92,7 +101,8 @@ const styles = StyleSheet.create({
         alignItems: 'center', 
         marginTop: 10, 
         marginRight: 15,
-        columnGap: 5
+        columnGap: 5,
+        borderColor: Colors.accent500,
     }, 
     date: {
         marginTop: 25

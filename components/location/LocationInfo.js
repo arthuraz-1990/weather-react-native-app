@@ -1,7 +1,8 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
 
 import { FontAwesome5 } from '@expo/vector-icons';
+import CustomButton from "../element/CustomButton";
 
 const LocationInfo = ({ info, onShowSearch }) => {
     return (
@@ -12,11 +13,10 @@ const LocationInfo = ({ info, onShowSearch }) => {
                 <Text style={styles.text}>{info.country}</Text>
             </View>
 
-            <TouchableOpacity style={styles.locationButton} onPress={onShowSearch}>
+            <CustomButton style={styles.locationButton} onPress={onShowSearch}>
                 <FontAwesome5 name="search-location" size={styles.textCity.fontSize + 10} color={Colors.darkMain} />
                 <Text style={[styles.text, styles.textLocationButton]}>Buscar Localização</Text>
-            </TouchableOpacity>
-            
+            </CustomButton>
         </View>
     )
 }
