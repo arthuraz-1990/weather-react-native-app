@@ -1,5 +1,6 @@
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../../constants/Colors";
+import CustomText from "../element/CustomText";
 
 const SearchResultItem = ({ item, onSelect }) => {
 
@@ -7,10 +8,10 @@ const SearchResultItem = ({ item, onSelect }) => {
 
     return (
         <TouchableOpacity style={styles.itemContainer} onPress={onSelect.bind(this, item)}>
-            <Text style={[styles.descriptionText, styles.text]}>{properties.formatted}</Text>
-            {properties.city && <Text style={[styles.itemText, styles.text]}>{properties.city}</Text>}
-            <Text style={[styles.itemText, styles.text]}>{properties.state}</Text>
-            <Text style={[styles.itemText, styles.text]}>{properties.country}</Text>
+            <CustomText bold style={[styles.descriptionText, styles.text]}>{properties.formatted}</CustomText>
+            {properties.city && <CustomText style={[styles.itemText, styles.text]}>{properties.city}</CustomText>}
+            <CustomText style={[styles.itemText, styles.text]}>{properties.state}</CustomText>
+            <CustomText style={[styles.itemText, styles.text]}>{properties.country}</CustomText>
         </TouchableOpacity>
     )
 

@@ -1,7 +1,8 @@
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, View } from "react-native";
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import Colors from "../../constants/Colors";
 import Util from "../../util/Util";
+import CustomText from "../element/CustomText";
 
 const DailyInfoSection = ({ selectedDay }) => {
 
@@ -18,28 +19,28 @@ const DailyInfoSection = ({ selectedDay }) => {
                             <FontAwesome5 name="temperature-high" size={iconSize} color={Colors.accent500} />
                         </View>
                         <View style={styles.textView}>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Máxima: {Util.formatNumber(day.maxtemp_c)} °C</Text>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Mínima: {Util.formatNumber(day.mintemp_c)} °C</Text>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Média: {Util.formatNumber(day.avgtemp_c)} °C</Text>
+                            <CustomText style={[styles.infoText, styles.centerAlign]}>Máxima: {Util.formatNumber(day.maxtemp_c)} °C</CustomText>
+                            <CustomText style={[styles.infoText, styles.centerAlign]}>Mínima: {Util.formatNumber(day.mintemp_c)} °C</CustomText>
+                            <CustomText style={[styles.infoText, styles.centerAlign]}>Média: {Util.formatNumber(day.avgtemp_c)} °C</CustomText>
                         </View>
                     </View>
                     <View style={[styles.item, styles.itemInner]}>
                         <View style={[styles.centerAlign, styles.iconView]}>
                             <FontAwesome5 name="wind" size={iconSize} color={Colors.accent500} />
                         </View>
-                        <Text style={[styles.infoText, styles.centerAlign, styles.textView]}>Vento: {Util.formatNumber(day.maxwind_kph)} km/h</Text>
+                        <CustomText style={[styles.infoText, styles.centerAlign, styles.textView]}>Vento: {Util.formatNumber(day.maxwind_kph)} km/h</CustomText>
                     </View>
                     <View style={[styles.item, styles.itemInner]}>
                         <View style={[styles.centerAlign, styles.iconView]}>
                             <FontAwesome5 name="cloud-rain" size={iconSize} color={Colors.accent500} />
                         </View>
-                        <Text style={[styles.infoText, styles.centerAlign, styles.textView]}>Chuva Prev.: {Util.formatNumber(day.totalprecip_mm)} mm</Text>
+                        <CustomText style={[styles.infoText, styles.centerAlign, styles.textView]}>Chuva Prev.: {Util.formatNumber(day.totalprecip_mm)} mm</CustomText>
                     </View>
                     <View style={[styles.item, styles.itemInner]}>
                         <View style={[styles.centerAlign, styles.iconView]}>
                             <FontAwesome5 name="eye-slash" size={iconSize} color={Colors.accent500} />
                         </View>
-                        <Text style={[styles.infoText, styles.centerAlign, styles.textView]}>Visibilidade: {Util.formatNumber(day.avgvis_km)} km</Text>
+                        <CustomText style={[styles.infoText, styles.centerAlign, styles.textView]}>Visibilidade: {Util.formatNumber(day.avgvis_km)} km</CustomText>
                     </View>
                 </View>
                 <View style={styles.info}>
@@ -47,16 +48,16 @@ const DailyInfoSection = ({ selectedDay }) => {
                         <View style={[styles.centerAlign, styles.iconView]}>
                             <MaterialCommunityIcons name="water-percent" size={iconSize} color={Colors.accent500} />
                         </View>
-                        <Text style={[styles.infoText, styles.centerAlign, styles.textView]}>Umidade: {Util.formatNumber(day.avghumidity)} %</Text>
+                        <CustomText style={[styles.infoText, styles.centerAlign, styles.textView]}>Umidade: {Util.formatNumber(day.avghumidity)} %</CustomText>
                     </View>
                     <View style={[styles.item, styles.itemInner]}>
                         <View style={[styles.centerAlign, styles.iconView]}>
                             <FontAwesome5 name="sun" size={iconSize} color={Colors.accent500} />
                         </View>
                         <View style={styles.textView}>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Nascer: {astro.sunrise}</Text>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Pôr: {astro.sunset}</Text>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Índice UV: {Util.formatNumber(day.uv)} %</Text>
+                            <CustomText style={[styles.infoText, styles.centerAlign]}>Nascer: {astro.sunrise}</CustomText>
+                            <CustomText style={[styles.infoText, styles.centerAlign]}>Pôr: {astro.sunset}</CustomText>
+                            <CustomText style={[styles.infoText, styles.centerAlign]}>Índice UV: {Util.formatNumber(day.uv)} %</CustomText>
                         </View>
                     </View>
                     <View style={[styles.item, styles.itemInner]}>
@@ -64,10 +65,10 @@ const DailyInfoSection = ({ selectedDay }) => {
                             <FontAwesome5 name="moon" size={iconSize} color={Colors.accent500} />
                         </View>
                         <View style={styles.textView}>
-                            <Text style={[styles.infoText, styles.centerAlign]}>{Util.translateMoonPhase(astro.moon_phase)}</Text>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Nascer: {astro.moonrise}</Text>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Pôr: {astro.moonset}</Text>
-                            <Text style={[styles.infoText, styles.centerAlign]}>Iluminação: {astro.moon_illumination}%</Text>
+                            <CustomText style={[styles.infoText, styles.centerAlign]}>{Util.translateMoonPhase(astro.moon_phase)}</CustomText>
+                            <CustomText style={[styles.infoText, styles.centerAlign]}>Nascer: {astro.moonrise}</CustomText>
+                            <CustomText style={[styles.infoText, styles.centerAlign]}>Pôr: {astro.moonset}</CustomText>
+                            <CustomText style={[styles.infoText, styles.centerAlign]}>Iluminação: {astro.moon_illumination}%</CustomText>
                         </View>
                     </View>
                 </View>

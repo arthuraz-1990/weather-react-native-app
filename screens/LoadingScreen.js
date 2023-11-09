@@ -1,9 +1,10 @@
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import CustomText from "../components/element/CustomText";
 
 const LoadingScreen = ({ textStyle }) => (
     <View style={styles.container}>
         <ActivityIndicator size='large'/>
-        <Text style={[styles.text, textStyle]}>Carregando...</Text>
+        <CustomText bold style={[styles.text, textStyle]}>Carregando...</CustomText>
     </View>
 );
 

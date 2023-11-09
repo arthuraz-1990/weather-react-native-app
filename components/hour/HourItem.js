@@ -1,8 +1,9 @@
 import dayjs from "dayjs";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import Util from "../../util/Util";
+import CustomText from "../element/CustomText";
 
 const HourItem = ({ item, onSelectHour, selected }) => {
 
@@ -28,11 +29,11 @@ const HourItem = ({ item, onSelectHour, selected }) => {
             <View style={styles.imageContainer}>
                 <Image style={styles.image} src={`https://${item.condition.icon}`} />
             </View>
-            <Text style={[itemTextColor, styles.itemText, styles.text]}>{hour}h</Text>
-            <Text style={[rainTextColor, styles.rainText, styles.text]}>{Util.formatNumber(item.temp_c)} °C</Text>
+            <CustomText style={[itemTextColor, styles.itemText, styles.text]}>{hour}h</CustomText>
+            <CustomText style={[rainTextColor, styles.rainText, styles.text]}>{Util.formatNumber(item.temp_c)} °C</CustomText>
             <View style={styles.rainRow}>
                 <FontAwesome5 name="cloud-rain" size={styles.rainText.fontSize} color={rainTextColor.color} />
-                <Text style={[rainTextColor, styles.rainText, styles.text]}>{item.chance_of_rain}%</Text>
+                <CustomText style={[rainTextColor, styles.rainText, styles.text]}>{item.chance_of_rain}%</CustomText>
             </View>
         </TouchableOpacity>
     )

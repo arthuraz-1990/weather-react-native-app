@@ -6,6 +6,7 @@ import { useState } from "react";
 import AddressService from "../services/Address.service";
 import LoadingScreen from "./LoadingScreen";
 import SearchResultsList from "../components/search/SearchResultsList";
+import CustomText from "../components/element/CustomText";
 
 const fontSize = 18;
 
@@ -84,7 +85,8 @@ const styles = StyleSheet.create({
     textInput: {
         flex: 1,
         backgroundColor: Colors.accent500,
-        padding: 8
+        padding: 8,
+        fontFamily: 'Inter_400Regular'
     },
     loadingText: {
         color: Colors.accent500
@@ -112,5 +114,5 @@ const styles = StyleSheet.create({
 });
 
 const emptyResults = (
-    <Text style={styles.emptyResults}>Não foram encontrados resultados.</Text>
+    <CustomText bold style={styles.emptyResults}>Não foram encontrados resultados.</CustomText>
 )

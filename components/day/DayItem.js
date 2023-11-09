@@ -1,10 +1,11 @@
 import dayjs from "dayjs";
-import { Image, StyleSheet, Text, View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
 import Util from '../../util/Util';
 import CustomButton from "../element/CustomButton";
+import CustomText from "../element/CustomText";
 
 const DayItem = ({ item, onSelectDay, selected }) => {
 
@@ -37,30 +38,30 @@ const DayItem = ({ item, onSelectDay, selected }) => {
                     <View style={styles.imageContainer}>
                         <Image style={styles.image} src={`https://${day.condition.icon}`} />
                     </View>
-                    <Text style={[itemTextColor, styles.itemText]}>{day.condition.text}</Text>
+                    <CustomText style={[itemTextColor, styles.itemText]} bold>{day.condition.text}</CustomText>
                 </View>
                 <View style={styles.textContainer}>
                     <View style={styles.buttonView}>
                         <CustomButton style={{...selectButtonBorder, ...styles.selectButton}} onPress={onSelectDay.bind(this, item)}>
-                            <Text style={{...itemTextColor, ...styles.selectButtonText}}>Visualizar</Text>
+                            <CustomText style={{...itemTextColor, ...styles.selectButtonText}} bold>Visualizar</CustomText>
                             <FontAwesome5 name="eye" size={18} color={itemTextColor.color} />
                         </CustomButton>
                     </View>
                     <View style={styles.textInfoContainer}>
-                        <Text style={[itemTextColor, styles.dateText]}>{date}</Text>
+                        <CustomText style={[itemTextColor, styles.dateText]} bold>{date}</CustomText>
                         <View style={styles.rowView}>
                             <FontAwesome5 name="temperature-high" size={18} color={itemTextColor.color} />
-                            <Text style={[itemTextColor, styles.itemText]}>{Util.formatNumber(day.maxtemp_c)} °C</Text>
+                            <CustomText style={[itemTextColor, styles.itemText]} bold>{Util.formatNumber(day.maxtemp_c)} °C</CustomText>
                         </View>
                         <View style={styles.rowView}>
                             <FontAwesome5 name="temperature-low" size={18} color={itemTextColor.color} />
-                            <Text style={[itemTextColor, styles.itemText]}>{Util.formatNumber(day.mintemp_c)} °C</Text>
+                            <CustomText style={[itemTextColor, styles.itemText]} bold>{Util.formatNumber(day.mintemp_c)} °C</CustomText>
                         </View>
                         <View style={styles.rowView}>
                             <FontAwesome5 name="cloud-rain" size={12} color={rainTextColor.color} />
-                            <Text style={[rainTextColor, styles.rainText]}>
+                            <CustomText style={[rainTextColor, styles.rainText]}>
                                 {day.daily_chance_of_rain}%
-                            </Text>
+                            </CustomText>
                         </View>
                     </View>
                 </View>

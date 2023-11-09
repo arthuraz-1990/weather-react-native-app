@@ -1,15 +1,16 @@
 import { StyleSheet, Text, View } from "react-native"
 import ReturnButton from "./ReturnButton"
 import Colors from "../../constants/Colors";
+import CustomText from "./CustomText";
 
 const SelectScreenHeader = ({ location, onReturn, date }) => 
     <View style={styles.header}>
         <View style={styles.locationSection}>
-            <Text style={[ styles.text, styles.locationText ]}>{location.name}</Text>
-            <Text style={styles.text}>{location.region}</Text>
-            <Text style={styles.text}>{location.country}</Text>
+            <CustomText style={[ styles.text, styles.locationText ]} bold>{location.name}</CustomText>
+            <CustomText style={styles.text}>{location.region}</CustomText>
+            <CustomText style={styles.text}>{location.country}</CustomText>
         </View>
-        {date && <Text style={[styles.text, styles.locationText]}>{ date }</Text> }
+        {date && <CustomText style={[styles.text, styles.locationText]} bold>{ date }</CustomText> }
         <ReturnButton onReturn={onReturn} style={styles.returnButton}/>
     </View>
 

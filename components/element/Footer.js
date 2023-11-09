@@ -1,9 +1,10 @@
 import { StyleSheet, Text, View } from "react-native";
 import Colors from "../../constants/Colors";
+import CustomText from "./CustomText";
 
 const Footer = () => (
     <View style={styles.container}>
-        <Text style={styles.footerText}>Previsão Fornecida por WeatherAPI.com</Text>
+        <CustomText style={styles.footerText} bold>Previsão Fornecida por WeatherAPI.com</CustomText>
     </View>
 )
 
@@ -18,7 +19,8 @@ const styles = StyleSheet.create({
     },
     footerText: {
         fontWeight: '600',
-        color: Colors.accent500
+        color: Colors.accent500,
+        fontSize: 13
     }
 })
     

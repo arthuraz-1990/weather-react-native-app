@@ -4,6 +4,7 @@ import HourList from "./HourList"
 
 import { FontAwesome5 } from '@expo/vector-icons';
 import Colors from "../../constants/Colors";
+import CustomText from "../element/CustomText";
 
 const HourlyInfoSection = ({selectedDay, selectedHour, onSelectHour}) => (
     <View style={styles.mainContainer}>
@@ -11,7 +12,7 @@ const HourlyInfoSection = ({selectedDay, selectedHour, onSelectHour}) => (
             <HourList hourList={selectedDay.hour} selected={selectedHour} onSelectHour={onSelectHour} />
             <View style={styles.infoView}>
                 <FontAwesome5 name='info-circle' size={14} color={Colors.accent500} />
-                <Text style={styles.infoText}>Selecione a hora para mais informações</Text>
+                <CustomText bold style={styles.infoText}>Selecione a hora para mais informações</CustomText>
             </View>
         </View>
         <View style={styles.weatherView}>
@@ -44,6 +45,6 @@ const styles = StyleSheet.create({
     },
     infoText: {
         color: Colors.accent500,
-        fontWeight: '600'
+        fontSize: 12
     }
 })

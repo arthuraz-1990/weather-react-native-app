@@ -4,6 +4,7 @@ import Util from "../../util/Util";
 import dayjs from "dayjs";
 import { FontAwesome5 } from '@expo/vector-icons';
 import CustomButton from "../element/CustomButton";
+import CustomText from "../element/CustomText";
 
 const iconSize = 18;
 
@@ -18,27 +19,27 @@ const SelectedDayItem = ({ selected, onShowDays, onShowHour }) => {
                     <View style={styles.imageContainer}>
                         <Image style={styles.image} src={`https://${day.condition.icon}`} />
                     </View>
-                    <Text style={[styles.text, styles.firstRowText]}>{day.condition.text}</Text>
+                    <CustomText style={[styles.text, styles.firstRowText]} bold>{day.condition.text}</CustomText>
                 </View>
                 <View style={styles.rightView}>
                     <CustomButton style={styles.selectDayButton} onPress={onShowDays}>
-                        <Text style={[styles.text, styles.selectText]}>Dias</Text>
+                        <CustomText style={[styles.text, styles.selectText]}>Dias</CustomText>
                         <FontAwesome5 name="calendar" size={iconSize} color={Colors.accent500} />
                     </CustomButton>
                     <CustomButton style={styles.selectDayButton} onPress={onShowHour}>
-                        <Text style={[styles.text, styles.selectText]}>Hora a Hora</Text>
+                        <CustomText style={[styles.text, styles.selectText]}>Hora a Hora</CustomText>
                         <FontAwesome5 name="clock" size={iconSize} color={Colors.accent500} />
                     </CustomButton>
                     
-                    <Text style={[ styles.text, styles.date ]}>{date}</Text>
-                    <Text style={[styles.text, styles.maxTemp]}>{Util.formatNumber(day.maxtemp_c)} °C</Text>
-                    <Text style={[styles.text]}>{Util.formatNumber(day.mintemp_c)} °C</Text>
+                    <CustomText style={[ styles.text, styles.date ]}>{date}</CustomText>
+                    <CustomText style={[styles.text, styles.maxTemp]}>{Util.formatNumber(day.maxtemp_c)} °C</CustomText>
+                    <CustomText style={[styles.text]}>{Util.formatNumber(day.mintemp_c)} °C</CustomText>
                     {day.daily_chance_of_rain > 0 && (
                         <View style={styles.rowView}>
                             <FontAwesome5 name="cloud-rain" size={iconSize} color={Colors.accent500} />
-                            <Text style={[styles.text]}>
+                            <CustomText style={[styles.text]}>
                                 {day.daily_chance_of_rain}%
-                            </Text>
+                            </CustomText>
                         </View>
                     )}
                 </View>

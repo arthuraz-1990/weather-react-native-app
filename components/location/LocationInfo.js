@@ -3,19 +3,20 @@ import Colors from "../../constants/Colors";
 
 import { FontAwesome5 } from '@expo/vector-icons';
 import CustomButton from "../element/CustomButton";
+import CustomText from "../element/CustomText";
 
 const LocationInfo = ({ info, onShowSearch }) => {
     return (
         <View style={styles.mainView}>
             <View style={styles.locationSection}>
-                <Text style={styles.textCity}>{info.name}</Text>
-                <Text style={styles.text}>{info.region}</Text>
-                <Text style={styles.text}>{info.country}</Text>
+                <CustomText style={styles.textCity} bold>{info.name}</CustomText>
+                <CustomText style={styles.text}>{info.region}</CustomText>
+                <CustomText style={styles.text}>{info.country}</CustomText>
             </View>
 
             <CustomButton style={styles.locationButton} onPress={onShowSearch}>
                 <FontAwesome5 name="search-location" size={styles.textCity.fontSize + 10} color={Colors.darkMain} />
-                <Text style={[styles.text, styles.textLocationButton]}>Buscar Localização</Text>
+                <CustomText style={[styles.text, styles.textLocationButton]}>Buscar Localização</CustomText>
             </CustomButton>
         </View>
     )

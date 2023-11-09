@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { ImageBackground, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import ForecastScreen from './screens/ForecastScreen';
 import LoadingScreen from './screens/LoadingScreen';
@@ -11,6 +11,10 @@ import SearchScreen from './screens/SearchScreen';
 import HoursScreen from './screens/HoursScreen';
 import SelectDayScreen from './screens/SelectDayScreen';
 import Footer from './components/element/Footer';
+import * as SplashScreen from 'expo-splash-screen';
+
+import { useFonts } from 'expo-font';
+import { Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
 
 const baseBackgroundSrc = './assets/images/';
 
@@ -39,7 +43,13 @@ const default_lat = LAT_TEST;
 const default_lon = LON_TEST;
 const defaultBackground = getBackground();
 
+SplashScreen.preventAutoHideAsync();
+
 export default function App() {
+
+  const [ fontsLoaded, fontError ] = useFonts({
+    Inter_400Regular, Inter_700Bold
+  });
 
   const [ loading, setLoading ] = useState(false);
   const [ forecastResponse, setForecastResponse ] = useState(null);
@@ -60,6 +70,12 @@ export default function App() {
     if (latLon)
       onLoadForecast();
   }, [latLon]);
+
+  const onLayoutRootView = useCallback(async () => {
+    if (fontsLoaded || fontError) {
+      await SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded, fontError]);
 
   const onLoadForecast = () => {
     setLoading(true);
@@ -121,6 +137,10 @@ export default function App() {
     setLocation(locationInfo);
   }
 
+  if (!fontsLoaded && !fontError) {
+    return null;
+  }
+
   let content = <ForecastScreen selectedDay={selectedDay} location={location} onShowSearch={onShowSearch} 
     onShowDays={onShowDays} onShowHour={onShowHour} />
 
@@ -150,7 +170,7 @@ export default function App() {
       <StatusBar style={showSearch ? 'light' : 'auto'} />
       <ImageBackground style={styles.mainView} imageStyle={styles.background}
           source={background} resizeMode='cover'>
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView style={styles.container} onLayout={onLayoutRootView}>
           <View style={[styles.container, marginStyle]}>
             { content }
           </View>
