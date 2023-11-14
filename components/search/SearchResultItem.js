@@ -10,7 +10,7 @@ const SearchResultItem = ({ item, onSelect }) => {
     const { properties } = item;
 
     return (
-        <Shadow>
+        <Shadow stretch>
             <TouchableOpacity style={styles.itemContainer} onPress={onSelect.bind(this, item)}>
                 <CustomText bold style={[styles.descriptionText, styles.text]}>{properties.formatted}</CustomText>
                 {properties.city && <CustomText style={[styles.itemText, styles.text]}>{properties.city}</CustomText>}

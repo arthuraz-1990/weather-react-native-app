@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        padding: 12
+        paddingHorizontal: 12
     },
     emptyResults: {
         color: Colors.accent500,

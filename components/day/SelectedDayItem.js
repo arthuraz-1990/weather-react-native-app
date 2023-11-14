@@ -133,6 +133,7 @@ const styles = StyleSheet.create({
         // marginTop: 25
     },
     infoContainer: {
-        margin: 5
+        margin: 5,
+        paddingLeft: 10
     }
 })
