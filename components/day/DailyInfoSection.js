@@ -1,14 +1,26 @@
-import { ScrollView, StyleSheet, View } from "react-native";
+import { Dimensions, ScrollView, StyleSheet, View } from "react-native";
 import { FontAwesome5, MaterialCommunityIcons } from '@expo/vector-icons'; 
 import Colors from "../../constants/Colors";
+import FontSize from "../../constants/FontSize";
 import Util from "../../util/Util";
 import CustomText from "../element/CustomText";
+import ScreenSize from "../../constants/ScreenSize";
+
+const iconSizeBreakpoints = {
+    xl: 65,
+    lg: 50,
+    md: 25,
+    sm: 20,
+    xs: 15
+}
 
 const DailyInfoSection = ({ selectedDay }) => {
 
     const { day, astro } = selectedDay;
 
-    const iconSize = 25;
+    const breakpoint = ScreenSize.getScreenSize(width);
+
+    const iconSize = iconSizeBreakpoints[breakpoint];
 
     return (
         <ScrollView style={styles.mainContainer} contentContainerStyle={styles.justifyView}>
@@ -80,6 +92,12 @@ const DailyInfoSection = ({ selectedDay }) => {
 
 export default DailyInfoSection;
 
+const width = Dimensions.get('window').width;
+
+const largerBreakpoint = ScreenSize.getScreenSize(width) in ['lg', 'xl'];
+
+let textFontSize = FontSize.getSize('secondary', width);
+
 const styles = StyleSheet.create({
     mainContainer: {
         // flex: 1,
@@ -108,33 +126,24 @@ const styles = StyleSheet.create({
     },
     itemInner: {
         width: '100%',
-        flexDirection: 'row'
-    },
-    conditionIconContainer: {
-        height: 55,
-        width: 55,
-        alignSelf: 'center',
-        alignContent: 'flex-start',
-        overflow: 'hidden'
-    },
-    conditionIcon: {
-        width: '100%',
-        height: '100%'
+        flexDirection: 'row',
+        alignItems: 'center'
     },
     infoText: {
         color: Colors.accent500,
         fontWeight: '500',
         textAlign: 'center',
-        fontSize: 13
+        fontSize: textFontSize
     },
     centerAlign: {
         alignSelf: 'center'
     },
     textView: {
-        width: '80%'
+        flex: largerBreakpoint ? 7 : 8
     },
     iconView: {
-        flex: 1,
-        justifyContent: 'center'
+        flex: largerBreakpoint ? 3 : 2,
+        justifyContent: 'center',
+        alignItems: 'center'
     }
 });

@@ -1,4 +1,4 @@
-import { Keyboard, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import { Dimensions, Keyboard, StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import Colors from "../constants/Colors";
 
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -7,8 +7,7 @@ import AddressService from "../services/Address.service";
 import LoadingScreen from "./LoadingScreen";
 import SearchResultsList from "../components/search/SearchResultsList";
 import CustomText from "../components/element/CustomText";
-
-const fontSize = 18;
+import FontSize from "../constants/FontSize";
 
 const SearchScreen = ({ onSelect, onHide }) => {
 
@@ -47,6 +46,8 @@ const SearchScreen = ({ onSelect, onHide }) => {
     else if (results.length === 0)
         content = emptyResults;
 
+    const fontSize = FontSize.getSize('main', width);
+
     return (
         <View style={styles.mainContainer}>
             <View style={styles.searchContainer}>
@@ -75,6 +76,8 @@ const SearchScreen = ({ onSelect, onHide }) => {
 
 export default SearchScreen;
 
+const width = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
@@ -86,7 +89,8 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: Colors.accent500,
         padding: 8,
-        fontFamily: 'Inter_400Regular'
+        fontFamily: 'Inter_400Regular',
+        fontSize: FontSize.getSize('main', width)
     },
     loadingText: {
         color: Colors.accent500
@@ -107,7 +111,7 @@ const styles = StyleSheet.create({
     },
     emptyResults: {
         color: Colors.accent500,
-        fontSize: 18,
+        fontSize: FontSize.getSize('main', width),
         fontWeight: '600',
         textAlign: 'center'
     }

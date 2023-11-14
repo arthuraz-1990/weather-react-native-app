@@ -1,5 +1,6 @@
-import { ActivityIndicator, StyleSheet, View } from "react-native";
+import { ActivityIndicator, Dimensions, StyleSheet, View } from "react-native";
 import CustomText from "../components/element/CustomText";
+import FontSize from "../constants/FontSize";
 
 const LoadingScreen = ({ textStyle }) => (
     <View style={styles.container}>
@@ -10,13 +11,15 @@ const LoadingScreen = ({ textStyle }) => (
 
 export default LoadingScreen;
 
+const width = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center'
     },
     text: {
-        fontSize: 24,
+        fontSize: FontSize.getSize('main', width) + 6,
         fontWeight: '700'
     }
 })

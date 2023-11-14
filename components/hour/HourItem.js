@@ -1,10 +1,12 @@
 import dayjs from "dayjs";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { Dimensions, Image, StyleSheet, TouchableOpacity, View } from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import Util from "../../util/Util";
 import CustomText from "../element/CustomText";
 import { Shadow } from 'react-native-shadow-2';
+import FontSize from "../../constants/FontSize";
+import ScreenSize from "../../constants/ScreenSize";
 
 const HourItem = ({ item, onSelectHour, selected }) => {
 
@@ -31,7 +33,7 @@ const HourItem = ({ item, onSelectHour, selected }) => {
                 <View style={styles.imageContainer}>
                     <Image style={styles.image} src={`https://${item.condition.icon}`} />
                 </View>
-                <CustomText style={[itemTextColor, styles.itemText, styles.text]}>{hour}h</CustomText>
+                <CustomText style={[itemTextColor, styles.itemText, styles.text]} bold>{hour}h</CustomText>
                 <CustomText style={[rainTextColor, styles.rainText, styles.text]}>{Util.formatNumber(item.temp_c)} °C</CustomText>
                 <View style={styles.rainRow}>
                     <FontAwesome5 name="cloud-rain" size={styles.rainText.fontSize} color={rainTextColor.color} />
@@ -45,29 +47,57 @@ const HourItem = ({ item, onSelectHour, selected }) => {
 
 export default HourItem;
 
+const width = Dimensions.get('window').width;
+
+const breakpoint = ScreenSize.getScreenSize(width);
+
+const imageSize = {
+    xl: 60,
+    lg: 50,
+    md: 45,
+    sm: 30,
+    xs: 25
+}
+
+const itemWidth = {
+    xl: 90,
+    lg: 80,
+    md: 70,
+    sm: 60,
+    xs: 50
+}
+
+const itemHeight = {
+    xl: 175,
+    lg: 150,
+    md: 115,
+    sm: 100,
+    xs: 90
+}
+
 const styles = StyleSheet.create({
     item: {
         borderRadius: 4,
         alignItems: 'center',
         marginRight: 4,
-        width: 70,
-        height: 115,
+        width: itemWidth[breakpoint],
+        height: itemHeight[breakpoint],
         rowGap: 3
     },
     imageContainer: {
         overflow: 'hidden',
-        width: 40,
-        height: 40
+        width: imageSize[breakpoint],
+        height: imageSize[breakpoint]
     },
     image: {
         width: '100%',
         height: '100%'
     },
     itemText: {
-        fontSize: 16
+        fontSize: FontSize.getSize('secondary', width)
     },
     rainText: {
-        fontSize: 13
+        fontSize: FontSize.getSize('secondary', width)
     },
     rainRow: {
         flexDirection: 'row',

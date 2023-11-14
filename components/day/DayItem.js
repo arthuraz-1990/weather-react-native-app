@@ -1,11 +1,13 @@
 import dayjs from "dayjs";
-import { Image, StyleSheet, View } from "react-native";
+import { Dimensions, Image, StyleSheet, View } from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 
 import Util from '../../util/Util';
 import CustomButton from "../element/CustomButton";
 import CustomText from "../element/CustomText";
+import FontSize from "../../constants/FontSize";
+import ScreenSize from "../../constants/ScreenSize";
 
 const DayItem = ({ item, onSelectDay, selected }) => {
 
@@ -31,6 +33,11 @@ const DayItem = ({ item, onSelectDay, selected }) => {
         borderColor: isSelected ? Colors.accent500 : Colors.secondary600
     }
 
+    const iconSize = FontSize.getSize('main', width);
+    const smallIconSize = FontSize.getSize('secondary', width);
+
+
+
     return (
         <View style={[borderStyle, styles.item]}>
             <View style={styles.rowView}>
@@ -44,21 +51,21 @@ const DayItem = ({ item, onSelectDay, selected }) => {
                     <View style={styles.buttonView}>
                         <CustomButton style={{...selectButtonBorder, ...styles.selectButton}} onPress={onSelectDay.bind(this, item)}>
                             <CustomText style={{...itemTextColor, ...styles.selectButtonText}} bold>Visualizar</CustomText>
-                            <FontAwesome5 name="eye" size={18} color={itemTextColor.color} />
+                            <FontAwesome5 name="eye" size={iconSize} color={itemTextColor.color} />
                         </CustomButton>
                     </View>
                     <View style={styles.textInfoContainer}>
                         <CustomText style={[itemTextColor, styles.dateText]} bold>{date}</CustomText>
                         <View style={styles.rowView}>
-                            <FontAwesome5 name="temperature-high" size={18} color={itemTextColor.color} />
+                            <FontAwesome5 name="temperature-high" size={iconSize} color={itemTextColor.color} />
                             <CustomText style={[itemTextColor, styles.itemText]} bold>{Util.formatNumber(day.maxtemp_c)} °C</CustomText>
                         </View>
                         <View style={styles.rowView}>
-                            <FontAwesome5 name="temperature-low" size={18} color={itemTextColor.color} />
+                            <FontAwesome5 name="temperature-low" size={iconSize} color={itemTextColor.color} />
                             <CustomText style={[itemTextColor, styles.itemText]} bold>{Util.formatNumber(day.mintemp_c)} °C</CustomText>
                         </View>
                         <View style={styles.rowView}>
-                            <FontAwesome5 name="cloud-rain" size={12} color={rainTextColor.color} />
+                            <FontAwesome5 name="cloud-rain" size={smallIconSize} color={rainTextColor.color} />
                             <CustomText style={[rainTextColor, styles.rainText]}>
                                 {day.daily_chance_of_rain}%
                             </CustomText>
@@ -73,6 +80,18 @@ const DayItem = ({ item, onSelectDay, selected }) => {
 }
 
 export default DayItem;
+
+const width = Dimensions.get('window').width;
+
+const iconSize = {
+    xl: 175,
+    lg: 135,
+    md: 80,
+    sm: 60,
+    xs: 40
+}
+
+const breakpoint = ScreenSize.getScreenSize(width);
 
 const styles = StyleSheet.create({
     item: {
@@ -103,10 +122,12 @@ const styles = StyleSheet.create({
     selectButton: {
         paddingHorizontal: 10,
         flexDirection: 'row',
-        columnGap: 5
+        columnGap: 5,
+        alignItems: 'center'
     },
     selectButtonText: {
-        fontWeight: '700'
+        fontWeight: '700',
+        fontSize: FontSize.getSize('secondary', width)
     },
     textInfoContainer: {
         flex: 1,
@@ -114,7 +135,8 @@ const styles = StyleSheet.create({
         marginTop: 10
     },
     dateText: {
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        fontSize: FontSize.getSize('main', width)
     },
     middleContainer: {
         flexDirection: 'row',
@@ -126,8 +148,8 @@ const styles = StyleSheet.create({
     },
     imageContainer: {
         overflow: 'hidden',
-        height: 80,
-        width: 80,
+        height: iconSize[breakpoint],
+        width: iconSize[breakpoint],
         alignSelf: 'center'
     },
     textContainer: {
@@ -137,11 +159,11 @@ const styles = StyleSheet.create({
     },
     itemText: {
         fontWeight: '700',
-        fontSize: 20,
+        fontSize: FontSize.getSize('main', width),
         textAlign: 'center'
     },
     rainText: {
-        fontSize: 18
+        fontSize: FontSize.getSize('secondary', width),
     },
     rowView: {
         flexDirection: 'row',

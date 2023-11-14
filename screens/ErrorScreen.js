@@ -1,5 +1,6 @@
-import { Button, StyleSheet, View } from "react-native";
+import { Button, Dimensions, StyleSheet, View } from "react-native";
 import CustomText from "../components/element/CustomText";
+import FontSize from "../constants/FontSize";
 
 const ErrorScreen = ({ onPressRetry, onPressSearch }) => (
     <View style={styles.container}>
@@ -11,13 +12,15 @@ const ErrorScreen = ({ onPressRetry, onPressSearch }) => (
 
 export default ErrorScreen;
 
+const width = Dimensions.get('window').width;
+
 const styles = StyleSheet.create({
     container: {
         flex: 1,
         justifyContent: 'center'
     },
     text: {
-        fontSize: 24,
+        fontSize: FontSize.getSize('main', width) + 6,
         fontWeight: '700'
     }
 })

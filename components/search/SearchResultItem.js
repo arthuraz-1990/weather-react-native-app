@@ -1,7 +1,9 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
+import { Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../../constants/Colors";
 import CustomText from "../element/CustomText";
 import { Shadow } from 'react-native-shadow-2';
+import FontSize from "../../constants/FontSize";
+import ScreenSize from "../../constants/ScreenSize";
 
 const SearchResultItem = ({ item, onSelect }) => {
 
@@ -22,11 +24,23 @@ const SearchResultItem = ({ item, onSelect }) => {
 
 export default SearchResultItem;
 
+const width = Dimensions.get('window').width;
+
+const breakpoint = ScreenSize.getScreenSize(width);
+
+const itemHeight = {
+    xl: 180,
+    lg: 140,
+    md: 80,
+    sm: 60,
+    xs: 50
+}
+
 const styles = StyleSheet.create({
     itemContainer: {
         borderRadius: 4,
         width: '100%',
-        height: 80,
+        height: itemHeight[breakpoint],
         borderColor: Colors.accent500,
         marginRight: 4,
         borderWidth: 1,
@@ -35,11 +49,11 @@ const styles = StyleSheet.create({
     },
    
     descriptionText: {
-        fontSize: 13,
+        fontSize: FontSize.getSize('secondary', width) - 2,
         fontWeight: '700'
     },
     itemText: {
-        fontSize: 9,
+        fontSize: FontSize.getSize('small', width) - 2,
         fontWeight: '500'
     },
     text: {

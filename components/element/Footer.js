@@ -1,6 +1,7 @@
-import { StyleSheet, View } from "react-native";
+import { Dimensions, StyleSheet, View } from "react-native";
 import Colors from "../../constants/Colors";
 import CustomText from "./CustomText";
+import FontSize from "../../constants/FontSize";
 
 const Footer = () => (
     <View style={styles.container}>
@@ -9,6 +10,8 @@ const Footer = () => (
 )
 
 export default Footer;
+
+const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     container: {
@@ -20,7 +23,7 @@ const styles = StyleSheet.create({
     footerText: {
         fontWeight: '600',
         color: Colors.accent500,
-        fontSize: 13
+        fontSize: FontSize.getSize('small', width)
     }
 })
     
