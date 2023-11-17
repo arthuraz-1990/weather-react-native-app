@@ -26,7 +26,7 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.arthuraz1990.weatherapp",
-      "versionCode": 2
+      "versionCode": 3
     },
     "web": {
       "favicon": "./assets/favicon.png"
