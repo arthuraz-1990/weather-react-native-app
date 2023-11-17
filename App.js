@@ -4,9 +4,7 @@ import { ImageBackground, SafeAreaView, StyleSheet, View } from 'react-native';
 import ForecastScreen from './screens/ForecastScreen';
 import LoadingScreen from './screens/LoadingScreen';
 import ErrorScreen from './screens/ErrorScreen';
-import WeatherService from './services/Weather.service';
 
-import { LAT_TEST, LON_TEST } from '@env';
 import SearchScreen from './screens/SearchScreen';
 import HoursScreen from './screens/HoursScreen';
 import SelectDayScreen from './screens/SelectDayScreen';
@@ -15,6 +13,7 @@ import * as SplashScreen from 'expo-splash-screen';
 
 import { useFonts } from 'expo-font';
 import { Inter_400Regular, Inter_700Bold } from '@expo-google-fonts/inter';
+import SelectionHelper from './hooks/SelectionHelper';
 
 const baseBackgroundSrc = './assets/images/';
 
@@ -39,8 +38,6 @@ const getBackground = (selectedDay) => {
   return images[iconName];
 }
 
-const default_lat = LAT_TEST;
-const default_lon = LON_TEST;
 const defaultBackground = getBackground();
 
 SplashScreen.preventAutoHideAsync();
@@ -51,25 +48,16 @@ export default function App() {
     Inter_400Regular, Inter_700Bold
   });
 
-  const [ loading, setLoading ] = useState(false);
-  const [ forecastResponse, setForecastResponse ] = useState(null);
+  const selectionHelper = new SelectionHelper();
 
-  const [ latLon, setLatLon ] = useState({lat: default_lat, lon: default_lon});
-  const [ location, setLocation ] = useState(null);
+  const { loading, location, selectedDay, forecastResponse } = selectionHelper;
 
   const [ showSearch, setShowSearch ] = useState(false);
 
   const [ showHour, setShowHour ] = useState(false);
   const [ showDays, setShowDays ] = useState(false);
 
-  const [ selectedDay, setSelectedDay ] = useState(null);
-
   const [ background, setBackground ] = useState(defaultBackground);
-
-  useEffect(() => {
-    if (latLon)
-      onLoadForecast();
-  }, [latLon]);
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded || fontError) {
@@ -77,29 +65,6 @@ export default function App() {
     }
   }, [fontsLoaded, fontError]);
 
-  const onLoadForecast = () => {
-    setLoading(true);
-
-    const { lat, lon } = latLon;
-    
-    WeatherService.getForecast(lat, lon).then(
-      resp => {
-        const { data } = resp;
-        setForecastResponse(data);
-        if (!location) {
-          setLocation(data.location);
-        }
-        const day = data.forecast.forecastday[0];
-        onSelectDay(day);
-      }
-    ).catch(err => {
-      console.error(err);
-      setForecastResponse(null);
-    }).
-    finally(() => {
-      setLoading(false);
-    })
-  }
 
   const onShowSearch = () => {
     setShowSearch(true);
@@ -109,9 +74,14 @@ export default function App() {
     setShowSearch(false);
   }
 
+  useEffect(() => {
+    if (selectedDay)
+      setBackground(getBackground(selectedDay));
+    
+  }, [selectedDay])
+
   const onSelectDay = (day) => {
-    setSelectedDay(day);
-    setBackground(getBackground(day));
+    selectionHelper.onSelectDay(day);
     onReturn();
   }
 
@@ -130,11 +100,7 @@ export default function App() {
 
   const onSelectLocation = (selectedLocation) => {
     onHideSearch();
-    const { coordinates } = selectedLocation.geometry;
-    setLatLon({ lat: coordinates[1], lon: coordinates[0] });
-    const { properties } = selectedLocation;
-    const locationInfo = { name: properties.formatted, region: properties.state, country: properties.country };
-    setLocation(locationInfo);
+    selectionHelper.onSelectLocation(selectedLocation);
   }
 
   if (!fontsLoaded && !fontError) {
