@@ -45,7 +45,7 @@ const SelectionHelper = () => {
 
     const searchCurrentPosition = () => {
       console.log('Carregando posição do usuário...');
-      Location.getLastKnownPositionAsync({ timeInterval: 5000, accuracy: Location.Accuracy.Highest }).then(
+      Location.getLastKnownPositionAsync({}).then(
         currentLocation => {
           handleLocation(currentLocation);
         }
