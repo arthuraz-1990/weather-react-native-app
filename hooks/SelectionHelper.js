@@ -22,19 +22,46 @@ const SelectionHelper = () => {
     const [ selectedDay, setSelectedDay ] = useState(null);
 
     useEffect(() => {
-        (async () => {
-          let { status } = await Location.requestForegroundPermissionsAsync();
-          if (status !== 'granted') {
-            console.log('usando localização padrão...');
-            setLatLon({lat: default_lat, lon: default_lon});
-          } else {
-            let currentLocation = await Location.getCurrentPositionAsync({});
-            const { latitude, longitude } = currentLocation.coords;
-            setLocation(null);
-            setLatLon({lat: latitude, lon: longitude });
+        Location.requestForegroundPermissionsAsync().then(
+          resp => {
+            console.log(resp);
+            const { status } = resp;
+            if (status !== 'granted') {
+              useDefaultLocation();
+            } else {
+              searchCurrentPosition();
+            }          
           }
-        })();
+        ).catch(error => {
+          console.error('Erro ao requisitar permissão de localização para o usuário', error);
+          useDefaultLocation();
+        });
     }, []);
+
+    const useDefaultLocation = () => {
+      console.log('usando localização padrão...');
+      setLatLon({lat: default_lat, lon: default_lon});
+    }
+
+    const searchCurrentPosition = () => {
+      console.log('Carregando posição do usuário...');
+      Location.getLastKnownPositionAsync({ timeInterval: 5000, accuracy: Location.Accuracy.Highest }).then(
+        currentLocation => {
+          handleLocation(currentLocation);
+        }
+      ).catch(error => {
+        console.error('Erro encontrado ao usar localização do usuário', error);
+        useDefaultLocation();
+      })
+    }
+
+    const handleLocation = (currentLocation) => {
+      console.log(currentLocation);
+      const { latitude, longitude } = currentLocation.coords;
+      setLocation(null);
+      console.log('usando localização do usuario: ', latitude, longitude);
+      setLatLon({lat: latitude, lon: longitude });
+    }
 
     useEffect(() => {
         if (latLon)

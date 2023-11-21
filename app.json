@@ -1,8 +1,9 @@
 {
   "expo": {
-    "name": "weather-app",
+    "name": "Previsão",
+    "description": "App de previsão do tempo - Desenvolvido em React Native com Expo CLI",
     "slug": "weather-app",
-    "version": "1.2.0",
+    "version": "1.2.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
