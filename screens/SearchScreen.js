@@ -52,6 +52,7 @@ const SearchScreen = ({ onSelect, onHide }) => {
         <View style={styles.mainContainer}>
             <View style={styles.searchContainer}>
                 <TextInput value={value} onChangeText={onChangeInput} placeholder="Nome do Local"
+                            onEndEditing={onSearch.bind(this)}
                             style={styles.textInput} autoCorrect={false}  />
 
                 <TouchableOpacity onPress={onSearch.bind(this)}>

@@ -79,7 +79,8 @@ const styles = StyleSheet.create({
     firstRow: {
         flex: 1,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        paddingHorizontal: 3
     },
     imageContainer: {
         overflow: 'hidden',
