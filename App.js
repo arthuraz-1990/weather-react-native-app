@@ -122,12 +122,11 @@ export default function App() {
       content = <SelectDayScreen location={location} forecastResponse={forecastResponse} 
         selectedDay={selectedDay} onReturn={onReturn} onSelectDay={onSelectDay} />
     } 
-  } else {
+  } else if (hasError) {
     content = <ErrorScreen onPressRetry={onLoadForecast} onPressSearch={onShowSearch} />
-  } 
-  // else {
-  //   content = <StartScreen />
-  // }
+  } else {
+    content = <StartScreen />
+   }
 
   const marginStyle = showSearch || loading ?
     {} : {

@@ -19,9 +19,7 @@ const width = Dimensions.get('window').width;
 
 const styles = StyleSheet.create({
     view: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
+        flex: 1
     },
     contentView: {
         alignItems: 'center',
