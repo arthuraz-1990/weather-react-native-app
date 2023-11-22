@@ -4,7 +4,6 @@ import Colors from "../../constants/Colors";
 import { FontAwesome5 } from '@expo/vector-icons'; 
 import Util from "../../util/Util";
 import CustomText from "../element/CustomText";
-import { Shadow } from 'react-native-shadow-2';
 import FontSize from "../../constants/FontSize";
 import ScreenSize from "../../constants/ScreenSize";
 
@@ -28,19 +27,17 @@ const HourItem = ({ item, onSelectHour, selected }) => {
     }
 
     return (
-        <Shadow>
-            <TouchableOpacity style={[borderStyle, styles.item]} onPress={onSelectHour.bind(this, item)}>
-                <View style={styles.imageContainer}>
-                    <Image style={styles.image} src={`https://${item.condition.icon}`} />
-                </View>
-                <CustomText style={[itemTextColor, styles.itemText, styles.text]} bold>{hour}h</CustomText>
-                <CustomText style={[rainTextColor, styles.rainText, styles.text]}>{Util.formatNumber(item.temp_c)} °C</CustomText>
-                <View style={styles.rainRow}>
-                    <FontAwesome5 name="cloud-rain" size={styles.rainText.fontSize} color={rainTextColor.color} />
-                    <CustomText style={[rainTextColor, styles.rainText, styles.text]}>{item.chance_of_rain}%</CustomText>
-                </View>
-            </TouchableOpacity>
-        </Shadow>
+        <TouchableOpacity style={[borderStyle, styles.item]} onPress={onSelectHour.bind(this, item)}>
+            <View style={styles.imageContainer}>
+                <Image style={styles.image} src={`https://${item.condition.icon}`} />
+            </View>
+            <CustomText style={[itemTextColor, styles.itemText, styles.text]} bold>{hour}h</CustomText>
+            <CustomText style={[rainTextColor, styles.rainText, styles.text]}>{Util.formatNumber(item.temp_c)} °C</CustomText>
+            <View style={styles.rainRow}>
+                <FontAwesome5 name="cloud-rain" size={styles.rainText.fontSize} color={rainTextColor.color} />
+                <CustomText style={[rainTextColor, styles.rainText, styles.text]}>{item.chance_of_rain}%</CustomText>
+            </View>
+        </TouchableOpacity>
     )
 
 }

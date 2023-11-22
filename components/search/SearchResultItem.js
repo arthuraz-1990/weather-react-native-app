@@ -1,7 +1,6 @@
 import { Dimensions, StyleSheet, TouchableOpacity } from "react-native";
 import Colors from "../../constants/Colors";
 import CustomText from "../element/CustomText";
-import { Shadow } from 'react-native-shadow-2';
 import FontSize from "../../constants/FontSize";
 import ScreenSize from "../../constants/ScreenSize";
 
@@ -10,14 +9,12 @@ const SearchResultItem = ({ item, onSelect }) => {
     const { properties } = item;
 
     return (
-        <Shadow stretch>
-            <TouchableOpacity style={styles.itemContainer} onPress={onSelect.bind(this, item)}>
-                <CustomText bold style={[styles.descriptionText, styles.text]}>{properties.formatted}</CustomText>
-                {properties.city && <CustomText style={[styles.itemText, styles.text]}>{properties.city}</CustomText>}
-                <CustomText style={[styles.itemText, styles.text]}>{properties.state}</CustomText>
-                <CustomText style={[styles.itemText, styles.text]}>{properties.country}</CustomText>
-            </TouchableOpacity>
-        </Shadow>
+        <TouchableOpacity style={styles.itemContainer} onPress={onSelect.bind(this, item)}>
+            <CustomText bold style={[styles.descriptionText, styles.text]}>{properties.formatted}</CustomText>
+            {properties.city && <CustomText style={[styles.itemText, styles.text]}>{properties.city}</CustomText>}
+            <CustomText style={[styles.itemText, styles.text]}>{properties.state}</CustomText>
+            <CustomText style={[styles.itemText, styles.text]}>{properties.country}</CustomText>
+        </TouchableOpacity>
     )
 
 }

@@ -55,7 +55,8 @@ const styles = StyleSheet.create({
     locationButton: {
         // flex: 1,
         alignItems: 'center',
-        width: locationButtonWidth[breakpoint]
+        width: locationButtonWidth[breakpoint],
+        borderColor: Colors.accent500
     },
     textLocationButton: {
         textAlign: 'center',
