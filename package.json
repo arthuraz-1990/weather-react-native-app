@@ -6,13 +6,15 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "prod": "expo start --no-dev --minify",
+    "build": "expo build:android"
   },
   "dependencies": {
     "@expo-google-fonts/inter": "^0.2.3",
-    "axios": "^1.5.1",
+    "axios": "^1.6.2",
     "dayjs": "^1.11.10",
-    "expo": "~49.0.13",
+    "expo": "^49.0.20",
     "expo-font": "~11.4.0",
     "expo-location": "~16.1.0",
     "expo-splash-screen": "~0.20.5",
